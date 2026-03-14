@@ -34,6 +34,10 @@ title: "About"
       <span><i class="fab fa-linkedin fa-sm"></i> <a href="https://www.linkedin.com/in/rmy43/" target="_blank" rel="noopener noreferrer">linkedin.com/in/rmy43</a></span>
       <span><i class="fab fa-github fa-sm"></i> <a href="https://github.com/matthewj5" target="_blank" rel="noopener noreferrer">github.com/matthewj5</a></span>
     </div>
+    <p class="spotify-widget">
+      <i class="fab fa-spotify" style="color:#1DB954"></i>
+      <span id="spotify-now-playing">Loading&hellip;</span>
+    </p>
   </div>
 </div>
 
@@ -117,3 +121,49 @@ title: "About"
     {% endfor %}
   </ul>
 </div>
+
+<script>
+(function () {
+  function timeAgo(isoStr) {
+    var played = new Date(isoStr);
+    var now    = new Date();
+    var secs   = Math.floor((now - played) / 1000);
+    if (secs < 60)  return secs + ' second' + (secs === 1 ? '' : 's') + ' ago';
+    var mins = Math.floor(secs / 60);
+    if (mins < 60)  return mins + ' minute' + (mins === 1 ? '' : 's') + ' ago';
+    var hrs  = Math.floor(mins / 60);
+    if (hrs  < 24)  return hrs  + ' hour'   + (hrs  === 1 ? '' : 's') + ' ago';
+    var days = Math.floor(hrs  / 24);
+    return days + ' day' + (days === 1 ? '' : 's') + ' ago';
+  }
+
+  var el = document.getElementById('spotify-now-playing');
+  if (!el) return;
+
+  fetch('{{ "/assets/data/now-playing.json" | relative_url }}?t=' + Date.now())
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!data.track) {
+        el.textContent = 'No recent tracks.';
+        return;
+      }
+      var t = data.track;
+      var artistLinks = t.artists.map(function (a) {
+        return '<a href="' + a.url + '" target="_blank" rel="noopener noreferrer">' +
+               escapeHtml(a.name) + '</a>';
+      }).join(', ');
+      el.innerHTML =
+        'listened to <a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+        escapeHtml(t.name) + '</a> by ' + artistLinks +
+        ' <span class="spotify-time">(' + timeAgo(t.played_at) + ')</span>';
+    })
+    .catch(function () {
+      el.textContent = 'Could not load recent track.';
+    });
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+              .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+})();
+</script>
