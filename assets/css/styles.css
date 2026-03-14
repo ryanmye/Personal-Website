@@ -774,3 +774,32 @@ main {
 
   .profile-contact-row { flex-direction: column; gap: 0.5rem; }
 }
+
+/* ===========================
+   Spotify Widget
+   =========================== */
+.spotify-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.spotify-widget .fab.fa-spotify {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.spotify-widget a {
+  color: var(--color-text-muted);
+}
+
+.spotify-widget a:hover {
+  color: #1DB954;
+}
+
+.spotify-time {
+  color: var(--color-text-muted);
+}
