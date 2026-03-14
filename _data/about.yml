@@ -1,0 +1,34 @@
+# About page content
+bio: |
+  I'm an undergraduate at Cornell (College of Engineering) with interests in machine
+  learning, computer vision, and AI for scientific discovery. I enjoy working at the
+  intersection of AI and real-world systems—especially where better data and automation
+  can help researchers scale their work.
+
+  I conduct research in the Sun Lab (PI: Jennifer Sun), working on computer vision
+  methods for dairy calf behavior analysis to support veterinary researchers studying
+  early indicators of disease and welfare. Outside of academics, I play violin in a
+  quartet and serve in Cru as a student leader in worship team.
+
+interests:
+  - "Machine learning and computer vision — deep learning for perception and recognition"
+  - "AI for science and real-world systems — using ML to accelerate research domains"
+  - "Representation learning and foundation models — self-supervised and pretrained models"
+  - "Data-efficient learning methods — few-shot and weakly supervised approaches"
+
+education:
+  institution: "Cornell University"
+  degree: "B.S. in Computer Science (College of Engineering)"
+  expected: "May 2028"
+  gpa: "4.05"
+  coursework:
+    - "Deep Learning, Computer Vision, Systems Organization"
+    - "Algorithms, Machine Learning, Discrete Math, Data Structures"
+    - "Functional Programming (OCaml)"
+    - "Linear Algebra, Differential Equations, Multivariable Calculus"
+    - "iOS Development"
+
+skills:
+  programming: "Python, Java, C++, OCaml"
+  machine_learning: "PyTorch, Hugging Face Transformers, NumPy, pandas, Matplotlib"
+  tools: "Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH, vibe-coding"

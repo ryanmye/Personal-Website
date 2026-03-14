@@ -5,7 +5,9 @@ title: "About"
 
 <div class="profile-section">
   <div class="profile-left">
-    <div class="profile-avatar">RY</div>
+    <div class="profile-avatar">
+      <img src="{{ '/assets/images/headshot.jpeg' | relative_url }}" alt="Ryan Ye">
+    </div>
     <h1 class="profile-name">Ryan Ye</h1>
     <p class="profile-position">
       Computer Science<br>

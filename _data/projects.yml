@@ -1,0 +1,34 @@
+# Projects showcase
+projects:
+  - title: "Automated Calf Behavior Analysis System"
+    description: "Computer vision pipeline for analyzing calf posture and behavior from overhead video. Designed to help veterinary researchers scale behavioral data collection beyond manual observation."
+    tags: ["Python", "YOLO", "DINO", "Computer Vision"]
+    bullets:
+      - "YOLO-based object detection for calf localization"
+      - "DINO feature extraction for posture classification"
+      - "Evaluation of VLMs for pose and eartag recognition"
+    url: null
+
+  - title: "Sisyphus — AI Productivity App"
+    description: "Full-stack web application that enforces productivity commitments through AI verification. Placed Top 5 out of 40+ teams in a course competition."
+    tags: ["Node.js", "Express", "Claude API", "Full-Stack"]
+    bullets:
+      - "Task timer and workflow tracking"
+      - "Photo-based task verification using an LLM API"
+      - "Automated accountability system with reminders"
+    url: "https://github.com/ryanmye/sisyphus"
+
+  - title: "Transformer-Based Piano Melody Generation"
+    description: "Research project exploring neural music generation with transformer architectures trained on large MIDI datasets."
+    tags: ["Python", "PyTorch", "Transformers", "Music AI"]
+    bullets:
+      - "Trained on 20k+ MIDI files from MAESTRO and Lakh datasets"
+      - "Compared CNN, RNN, LSTM, and Transformer architectures"
+      - "Demonstrated improved musical coherence with fine-tuned pretrained transformers"
+    url: null
+
+  - title: "Personal Website"
+    description: "This site! A clean, fast academic personal website built with Jekyll and hosted on GitHub Pages. Includes a blog, project showcase, and research section."
+    tags: ["Jekyll", "HTML/CSS", "GitHub Pages", "vibe coding"]
+    bullets: []
+    url: "https://github.com/ryanmye/aboutme"

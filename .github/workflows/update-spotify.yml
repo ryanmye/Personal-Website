@@ -75,17 +75,17 @@ jobs:
                   'fetched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
               }
 
-          os.makedirs('assets/data', exist_ok=True)
-          with open('assets/data/now-playing.json', 'w') as f:
+          os.makedirs('_data', exist_ok=True)
+          with open('_data/now-playing.json', 'w') as f:
               json.dump(result, f, indent=2)
 
-          print("Spotify data written to assets/data/now-playing.json")
+          print("Spotify data written to _data/now-playing.json")
           PYEOF
 
       - name: Commit updated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/data/now-playing.json
+          git add _data/now-playing.json
           git diff --staged --quiet || git commit -m "chore: update Spotify now-playing data [skip ci]"
           git push
