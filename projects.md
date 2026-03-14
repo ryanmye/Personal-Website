@@ -86,7 +86,7 @@ permalink: /projects/
       <span class="tag">GitHub Pages</span>
     </div>
     <div class="card-links">
-      <a href="https://github.com/ryanmye/Personal-Website" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+      <a href="https://github.com/ryanmye/aboutme" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
     </div>
   </article>
 

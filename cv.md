@@ -6,6 +6,11 @@ permalink: /cv/
 
 <div class="page-header">
   <h1>CV</h1>
+  <p class="resume-download">
+    <a href="{{ '/25Dec_Ye_Ryan_Resume.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer" class="btn-download">
+      <i class="fas fa-file-pdf"></i> Download PDF
+    </a>
+  </p>
 </div>
 
 <div class="resume-section">
@@ -18,7 +23,8 @@ permalink: /cv/
     <p class="resume-item-sub">B.S. in Computer Science (College of Engineering)</p>
     <ul>
       <li>GPA: 4.05</li>
-      <li>Relevant coursework: Algorithms, Machine Learning, Data Structures, Functional
+      <li>Relevant coursework: Deep Learning, Computer Vision, Systems Organization,
+          Algorithms, Machine Learning, Discrete Math, Data Structures, Functional
           Programming (OCaml), Linear Algebra, Differential Equations, Multivariable
           Calculus, iOS Development</li>
     </ul>
@@ -96,9 +102,9 @@ permalink: /cv/
 <div class="resume-section">
   <h2>Skills</h2>
   <div class="resume-item">
-    <p><strong>Programming:</strong> Python, Java, C++, OCaml, JavaScript, HTML/CSS</p>
+    <p><strong>Programming:</strong> Python, Java, C++, OCaml</p>
     <p><strong>Machine Learning:</strong> PyTorch, Hugging Face Transformers, NumPy, pandas, Matplotlib</p>
-    <p><strong>Tools:</strong> Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH</p>
+    <p><strong>Tools:</strong> Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH, vibe-coding</p>
   </div>
 </div>
 
