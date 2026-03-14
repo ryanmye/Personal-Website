@@ -648,6 +648,28 @@ main {
 /* ===========================
    CV / Resume Page
    =========================== */
+.resume-download {
+  margin: 0.75rem 0 0;
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-download:hover {
+  background: var(--color-accent-hover);
+}
+
 .resume-section {
   margin-bottom: 2.25rem;
 }
@@ -838,6 +860,15 @@ main {
 
 .news-content strong {
   font-weight: 600;
+}
+
+.post-preview-table .news-content a {
+  font-weight: 500;
+}
+
+.post-preview-text {
+  color: var(--color-text-muted);
+  font-weight: 400;
 }
 
 @media (max-width: 680px) {

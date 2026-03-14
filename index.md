@@ -20,14 +20,11 @@ title: "About"
 
   <div class="profile-right">
     <p>
-      Computer Science student at Cornell University interested in machine learning,
-      computer vision, and AI for scientific discovery. I enjoy working at the intersection
-      of AI and real-world systems, particularly in domains where better data and automation
-      can help researchers scale their work.
-    </p>
-    <p>
-      Currently, I conduct research in the Sun Lab at Cornell, where I work on computer
-      vision methods for animal behavior monitoring in agricultural environments.
+      I'm Ryan Ye, an undergraduate in Computer Science at Cornell University. I work on
+      computer vision and machine learning in the Sun Lab (PI: Jennifer Sun), currently
+      building systems for animal behavior monitoring in agricultural environments. I'm
+      currently interested in AI for science and making research tools that augment
+      scientist workflows.
     </p>
     <div class="profile-contact-row">
       <span><i class="fas fa-envelope fa-sm"></i> <a href="mailto:rmy43@cornell.edu">rmy43@cornell.edu</a></span>
@@ -45,45 +42,43 @@ title: "About"
   <h2 class="section-title">About</h2>
 
   <p>
-    I am an undergraduate studying Computer Science at Cornell University (College of
-    Engineering). My interests lie broadly in:
-  </p>
-  <ul>
-    <li>Machine learning and computer vision</li>
-    <li>AI for science and real-world systems</li>
-    <li>Representation learning and foundation models</li>
-    <li>Data-efficient learning methods</li>
-  </ul>
-  <p>
-    I enjoy collaborating across disciplines and working with researchers in domains like
-    veterinary science, agriculture, and economics to design AI systems that help analyze
-    complex real-world data.
+    I'm an undergraduate at Cornell (College of Engineering) with interests in machine
+    learning, computer vision, and AI for scientific discovery. I enjoy working at the
+    intersection of AI and real-world systems—especially where better data and automation
+    can help researchers scale their work.
   </p>
   <p>
-    Outside of academics, I am a violinist in the Cornell Orchestras and enjoy exploring
-    how technology and creativity intersect.
+    I conduct research in the Sun Lab, working on a project to develop computer vision
+    methods for dairy calf behavior analysis to support veterinary researchers studying
+    early indicators of disease and welfare. Outside of academics, I play violin in a
+    quartet and serve in Cru as a student leader in worship team.
   </p>
 </div>
 
 <div class="content-section">
-  <h2 class="section-title">Announcements</h2>
-  {% if site.data.announcements and site.data.announcements.size > 0 %}
-  <table class="news-table" id="news-table">
-    {% for item in site.data.announcements limit:10 %}
+  <div class="section-header">
+    <h2 class="section-title" style="border:none;padding:0;margin:0">Posts</h2>
+    <a href="{{ '/blog' | relative_url }}">all posts &rarr;</a>
+  </div>
+
+  {% if site.posts.size > 0 %}
+  <table class="news-table post-preview-table">
+    {% for post in site.posts limit:10 %}
     <tr>
       <td class="news-date">
-        <time data-date="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %-d, %Y" }}</time>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
       </td>
-      <td class="news-content">{{ item.content }}</td>
+      <td class="news-content">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% if post.excerpt %}
+        <span class="post-preview-text"> — {{ post.excerpt | strip_html | truncate: 80 }}</span>
+        {% endif %}
+      </td>
     </tr>
     {% endfor %}
   </table>
-  <p class="news-empty" id="news-empty" style="display:none">No recent updates.</p>
-  <button class="news-more-btn" id="news-more-btn" style="display:none" type="button">
-    show more <i class="fas fa-chevron-down fa-xs"></i>
-  </button>
   {% else %}
-  <p class="news-empty">No recent updates.</p>
+  <p class="news-empty">No posts yet — check back soon!</p>
   {% endif %}
 </div>
 
@@ -96,7 +91,7 @@ title: "About"
   <div class="research-entry">
     <h3>AI for Animal Behavior Monitoring</h3>
     <p class="research-meta">
-      <span class="research-role">Undergraduate Researcher</span> &mdash; Sun Lab, Cornell University
+      <span class="research-role">Undergraduate Researcher</span> &mdash; Sun Lab (PI: Jennifer Sun), Cornell University
     </p>
     <p>
       I work on scalable computer vision systems for analyzing dairy calf behavior in
@@ -110,38 +105,6 @@ title: "About"
       support from a CIDA grant.
     </p>
   </div>
-</div>
-
-<div class="content-section">
-  <div class="section-header">
-    <h2 class="section-title" style="border:none;padding:0;margin:0">Recent Posts</h2>
-    <a href="{{ '/blog' | relative_url }}">all posts &rarr;</a>
-  </div>
-
-  <ul class="post-list" role="list">
-    {% assign recent_posts = site.posts | limit: 3 %}
-    {% for post in recent_posts %}
-    <li class="post-item">
-      <h3 class="post-item-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h3>
-      <p class="post-item-meta">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-        {% if post.tags and post.tags.size > 0 %}
-        &mdash;
-        {% for tag in post.tags %}<span class="tag">{{ tag }}</span> {% endfor %}
-        {% endif %}
-      </p>
-      {% if post.excerpt %}
-      <p class="post-item-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-      {% endif %}
-    </li>
-    {% else %}
-    <li class="post-item">
-      <p class="post-item-excerpt">No posts yet — check back soon!</p>
-    </li>
-    {% endfor %}
-  </ul>
 </div>
 
 <script>
@@ -163,61 +126,6 @@ title: "About"
   function escapeHtml(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
               .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-
-  /* ── announcement timestamps ── */
-  document.querySelectorAll('time[data-date]').forEach(function (el) {
-    el.textContent = timeAgo(el.getAttribute('data-date'));
-  });
-
-  /* ── announcement visibility: hide entries older than 30 days ── */
-  var THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
-  var nowMs       = Date.now();
-  var tableEl     = document.getElementById('news-table');
-  var emptyEl     = document.getElementById('news-empty');
-  var moreBtn     = document.getElementById('news-more-btn');
-
-  if (tableEl) {
-    var rows    = Array.prototype.slice.call(tableEl.querySelectorAll('tr'));
-    var oldRows = rows.filter(function (row) {
-      var t = row.querySelector('time[data-date]');
-      return t && (nowMs - new Date(t.getAttribute('data-date')).getTime()) > THIRTY_DAYS_MS;
-    });
-
-    oldRows.forEach(function (r) { r.classList.add('news-row-old'); });
-
-    var recentCount = rows.length - oldRows.length;
-
-    /* Nothing recent — hide the table, reveal the empty-state message */
-    if (recentCount === 0 && emptyEl) {
-      tableEl.style.display = 'none';
-      emptyEl.style.display = 'block';
-    }
-
-    /* There are older entries to toggle */
-    if (oldRows.length > 0 && moreBtn) {
-      moreBtn.style.display = 'inline-flex';
-      var expanded = false;
-
-      moreBtn.addEventListener('click', function () {
-        expanded = !expanded;
-
-        /* Show / re-hide older rows */
-        oldRows.forEach(function (r) {
-          r.classList.toggle('news-row-old', !expanded);
-        });
-
-        /* If every row was old, also toggle the table / empty-state text */
-        if (recentCount === 0) {
-          tableEl.style.display = expanded ? '' : 'none';
-          if (emptyEl) emptyEl.style.display = expanded ? 'none' : 'block';
-        }
-
-        moreBtn.innerHTML = expanded
-          ? 'show less <i class="fas fa-chevron-up fa-xs"></i>'
-          : 'show more <i class="fas fa-chevron-down fa-xs"></i>';
-      });
-    }
   }
 
   /* ── Spotify "recently listened" ── */

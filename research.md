@@ -14,7 +14,7 @@ permalink: /research/
 <div class="research-entry">
   <h3>AI for Animal Behavior Monitoring</h3>
   <p class="research-meta">
-    <span class="research-role">Undergraduate Researcher</span> &mdash; Sun Lab, Cornell University
+    <span class="research-role">Undergraduate Researcher</span> &mdash; Sun Lab (PI: Jennifer Sun), Cornell University
   </p>
   <p>
     I work on scalable computer vision systems for analyzing dairy calf behavior in

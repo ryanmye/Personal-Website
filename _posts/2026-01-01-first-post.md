@@ -34,7 +34,7 @@ There won't be a strict schedule — I'll write when I have something worth sayi
 
 The site is built with [Jekyll](https://jekyllrb.com) and hosted on
 [GitHub Pages](https://pages.github.com). The entire source is
-[available on GitHub](https://github.com/ryanmye/Personal-Website). Feel free to
+[available on GitHub](https://github.com/ryanmye/aboutme). Feel free to
 fork it or use it as a starting point for your own site.
 
 To add a new post, I just create a Markdown file in `_posts/` following the
@@ -44,6 +44,6 @@ and fast.
 ## Getting in Touch
 
 If anything resonates — or if you spot a mistake — feel free to reach out via
-[email](mailto:ryan@example.com) or open an issue on GitHub. I'd love to hear from you.
+[email](mailto:rmy43@cornell.edu) or open an issue on GitHub. I'd love to hear from you.
 
 Here's to the start of something. 🚀

@@ -9,9 +9,15 @@ permalink: /about/
   <p class="subtitle">Computer Science student at Cornell University.</p>
 </div>
 
-I am an undergraduate studying Computer Science at Cornell University (College of
-Engineering). My interests lie broadly in machine learning, computer vision, and AI
-for scientific discovery.
+I'm an undergraduate at Cornell (College of Engineering) with interests in machine
+learning, computer vision, and AI for scientific discovery. I enjoy working at the
+intersection of AI and real-world systems—especially where better data and automation
+can help researchers scale their work.
+
+I conduct research in the Sun Lab (PI: Jennifer Sun), working on computer vision
+methods for dairy calf behavior analysis to support veterinary researchers studying
+early indicators of disease and welfare. Outside of academics, I play violin in a
+quartet and serve in Cru as a student leader in worship team.
 
 ## Interests
 
@@ -20,33 +26,25 @@ for scientific discovery.
 - **Representation learning and foundation models** — self-supervised and pretrained models
 - **Data-efficient learning methods** — few-shot and weakly supervised approaches
 
-I enjoy collaborating across disciplines and working with researchers in domains like
-veterinary science, agriculture, and economics to design AI systems that help analyze
-complex real-world data.
-
-Outside of academics, I am a violinist in the Cornell Orchestras and enjoy exploring how
-technology and creativity intersect.
-
 ## Education
 
 **Cornell University** — B.S. in Computer Science (College of Engineering)
 *Expected May 2028* | GPA: 4.05
 
 Relevant coursework:
-- Algorithms
-- Machine Learning
-- Data Structures
+- Deep Learning, Computer Vision, Systems Organization
+- Algorithms, Machine Learning, Discrete Math, Data Structures
 - Functional Programming (OCaml)
 - Linear Algebra, Differential Equations, Multivariable Calculus
 - iOS Development
 
 ## Skills
 
-**Programming:** Python, Java, C++, OCaml, JavaScript, HTML/CSS
+**Programming:** Python, Java, C++, OCaml
 
 **Machine Learning:** PyTorch, Hugging Face Transformers, NumPy, pandas, Matplotlib
 
-**Tools:** Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH
+**Tools:** Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH, vibe-coding
 
 ## Contact
 
