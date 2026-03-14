@@ -9,46 +9,36 @@ permalink: /about/
   <p class="subtitle">Computer Science student at Cornell University.</p>
 </div>
 
-I'm an undergraduate at Cornell (College of Engineering) with interests in machine
-learning, computer vision, and AI for scientific discovery. I enjoy working at the
-intersection of AI and real-world systems—especially where better data and automation
-can help researchers scale their work.
-
-I conduct research in the Sun Lab (PI: Jennifer Sun), working on computer vision
-methods for dairy calf behavior analysis to support veterinary researchers studying
-early indicators of disease and welfare. Outside of academics, I play violin in a
-quartet and serve in Cru as a student leader in worship team.
+{{ site.data.about.bio | markdownify }}
 
 ## Interests
 
-- **Machine learning and computer vision** — deep learning for perception and recognition
-- **AI for science and real-world systems** — using ML to accelerate research domains
-- **Representation learning and foundation models** — self-supervised and pretrained models
-- **Data-efficient learning methods** — few-shot and weakly supervised approaches
+<ul>
+{% for interest in site.data.about.interests %}
+  <li><strong>{{ interest | split: " — " | first }}</strong> — {{ interest | split: " — " | last }}</li>
+{% endfor %}
+</ul>
 
 ## Education
 
-**Cornell University** — B.S. in Computer Science (College of Engineering)
-*Expected May 2028* | GPA: 4.05
+**{{ site.data.about.education.institution }}** — {{ site.data.about.education.degree }}
+*Expected {{ site.data.about.education.expected }}* | GPA: {{ site.data.about.education.gpa }}
 
 Relevant coursework:
-- Deep Learning, Computer Vision, Systems Organization
-- Algorithms, Machine Learning, Discrete Math, Data Structures
-- Functional Programming (OCaml)
-- Linear Algebra, Differential Equations, Multivariable Calculus
-- iOS Development
+{% for course in site.data.about.education.coursework %}
+- {{ course }}
+{% endfor %}
 
 ## Skills
 
-**Programming:** Python, Java, C++, OCaml
+**Programming:** {{ site.data.about.skills.programming }}
 
-**Machine Learning:** PyTorch, Hugging Face Transformers, NumPy, pandas, Matplotlib
+**Machine Learning:** {{ site.data.about.skills.machine_learning }}
 
-**Tools:** Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH, vibe-coding
+**Tools:** {{ site.data.about.skills.tools }}
 
 ## Contact
 
-- **Email:** [rmy43@cornell.edu](mailto:rmy43@cornell.edu)
-- **LinkedIn:** [linkedin.com/in/rmy43](https://www.linkedin.com/in/rmy43/)
-- **GitHub:** [github.com/ryanmye](https://github.com/ryanmye)
-
+- **Email:** [{{ site.data.profile.email }}](mailto:{{ site.data.profile.email }})
+- **LinkedIn:** [linkedin.com/in/rmy43]({{ site.data.profile.social.linkedin }})
+- **GitHub:** [github.com/ryanmye]({{ site.data.profile.social.github }})
