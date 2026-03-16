@@ -2,7 +2,15 @@
   <div class="container nav-inner">
     <a class="nav-brand" href="{{ '/' | relative_url }}">{{ site.author }}</a>
 
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+    <div class="nav-right">
+      <div id="theme-toggle" class="theme-toggle" role="group" aria-label="Theme selector">
+        <button type="button" class="theme-dot" data-theme="linen" title="Linen" aria-label="Linen theme" style="background:#5C4F43"></button>
+        <button type="button" class="theme-dot" data-theme="pure" title="Pure" aria-label="Pure theme" style="background:#111111"></button>
+        <button type="button" class="theme-dot" data-theme="barely" title="Barely dark" aria-label="Barely dark theme" style="background:#B89A7D"></button>
+        <button type="button" class="theme-dot theme-dot-dark-mono" data-theme="dark-mono" title="Dark mono" aria-label="Dark mono theme" style="background:#E8E8E8"></button>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
       <span></span>
       <span></span>
       <span></span>
@@ -15,6 +23,7 @@
       <li><a href="{{ '/blog' | relative_url }}"{% if page.url contains '/blog' %} class="active"{% endif %}>blog</a></li>
       <li><a href="{{ '/cv' | relative_url }}"{% if page.url contains '/cv' %} class="active"{% endif %}>cv</a></li>
     </ul>
+    </div>
   </div>
 </nav>
 
