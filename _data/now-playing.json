@@ -1,14 +1,19 @@
 {
   "track": {
-    "name": "Flightless Bird, American Mouth",
-    "url": "https://open.spotify.com/track/1fEGtTZjrjJW8eUeewnNJR",
+    "name": "Don't Fail Me Now",
+    "url": "https://open.spotify.com/track/6kVZLcEMeDhRqt6LHrGPd9",
     "artists": [
       {
-        "name": "Iron & Wine",
-        "url": "https://open.spotify.com/artist/4M5nCE77Qaxayuhp3fVn4V"
+        "name": "Hunter Metts",
+        "url": "https://open.spotify.com/artist/1nQp0Yk9yxk2PJsXOtMR14"
       }
     ],
-    "played_at": "2026-03-16T21:21:47.308Z"
+    "played_at": "2026-03-16T21:57:24.840Z"
   },
-  "fetched_at": "2026-03-16T21:24:29Z"
+  "fetched_at": "2026-03-16T21:58:30Z",
+  "context": {
+    "type": "playlist",
+    "name": "fix me?",
+    "url": "https://open.spotify.com/playlist/0nk8P6RYfXRW2FF8zDFjrR?sessionId=1773705600001&mode=enhanced"
+  }
 }
