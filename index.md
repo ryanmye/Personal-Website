@@ -48,7 +48,7 @@ title: "About"
       </div>
     </div>
     <p class="spotify-widget" aria-live="polite" aria-atomic="true">
-      <i class="fab fa-spotify" style="color:#1DB954" aria-hidden="true"></i>
+      <i class="fab fa-spotify spotify-icon" aria-hidden="true"></i>
       <span id="spotify-now-playing">Loading&hellip;</span>
     </p>
   </div>
@@ -166,10 +166,17 @@ title: "About"
           return '<a href="' + a.url + '" target="_blank" rel="noopener noreferrer">' +
                  escapeHtml(a.name) + '</a>';
         }).join(', ');
-        spotifyEl.innerHTML =
-          'listened to <a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-          escapeHtml(t.name) + '</a> by ' + artistLinks +
-          ' <span class="spotify-time">(' + timeAgo(t.played_at) + ')</span>';
+        var html = 'listened to <a href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+          escapeHtml(t.name) + '</a> by ' + artistLinks;
+        if (data.context && data.context.name && data.context.url) {
+          var ctxType = data.context.type || '';
+          var ctxLabel = ctxType === 'playlist' ? 'playlist' : ctxType === 'album' ? 'album' : ctxType === 'artist' ? 'artist' : '';
+          html += ' from ' + (ctxLabel ? ctxLabel + ' ' : '') +
+            '<a href="' + data.context.url + '" target="_blank" rel="noopener noreferrer">' +
+            escapeHtml(data.context.name) + '</a>';
+        }
+        html += ' <span class="spotify-time">(' + timeAgo(t.played_at) + ')</span>';
+        spotifyEl.innerHTML = html;
       })
       .catch(function () { spotifyEl.textContent = 'Could not load recent track.'; })
       .finally(function () { clearTimeout(timeoutId); });

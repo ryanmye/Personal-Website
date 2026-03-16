@@ -11,14 +11,14 @@
    Custom Properties
    =========================== */
 :root {
-  --bg:          #FAF5EE;
+  --bg:          #F8F5F1;
   --surface:     #FFFFFF;
-  --border:      #E6D9C8;
-  --text:        #2A1F16;
-  --muted:       #8A7565;
-  --accent:      #C4785A;
-  --accent-soft: #F5E6DC;
-  --accent-dark: #9E5A40;
+  --border:      #DDD6CE;
+  --text:        #2A2218;
+  --muted:       #8A7C6E;
+  --accent:      #5C4F43;
+  --accent-soft: #EDE6DC;
+  --accent-dark: #3A2E24;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-hero:  'DM Serif Display', serif;
@@ -28,8 +28,9 @@
   --nav-height: 56px;
   --radius: 8px;
 
-  --color-code-bg:  #F5E6DC;
-  --color-code-text: #2A1F16;
+  --color-code-bg:  #EDE6DC;
+  --color-code-text: #2A2218;
+  --theme-dot-border: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -235,6 +236,42 @@ main {
   background: var(--text);
   border-radius: 2px;
   transition: all 0.2s;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.theme-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: outline 0.15s ease;
+}
+
+.theme-dot.active {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-dot-dark-mono {
+  border: 0.5px solid var(--theme-dot-border);
 }
 
 /* ===========================
@@ -799,7 +836,7 @@ main {
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -841,7 +878,7 @@ main {
   gap: 0.5rem;
   padding: 10px 20px;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   text-decoration: none;
   border-radius: 8px;
   font-size: 14px;
@@ -994,9 +1031,11 @@ main {
   color: var(--muted);
 }
 
-.spotify-widget .fab.fa-spotify {
+.spotify-widget .fab.fa-spotify,
+.spotify-widget .spotify-icon {
   font-size: 1.1rem;
   flex-shrink: 0;
+  color: var(--accent);
 }
 
 .spotify-widget a {
@@ -1004,7 +1043,7 @@ main {
 }
 
 .spotify-widget a:hover {
-  color: #1DB954;
+  color: var(--accent);
 }
 
 .spotify-time {

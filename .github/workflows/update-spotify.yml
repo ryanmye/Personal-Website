@@ -74,6 +74,26 @@ jobs:
                   },
                   'fetched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
               }
+              # Fetch context (playlist/album/artist) if present
+              context_info = None
+              if item.get('context'):
+                  ctx = item['context']
+                  ctx_href = ctx.get('href')
+                  ctx_url = ctx.get('external_urls', {}).get('spotify', '')
+                  if ctx_href:
+                      try:
+                          ctx_req = urllib.request.Request(ctx_href, headers={'Authorization': f'Bearer {access_token}'})
+                          with urllib.request.urlopen(ctx_req) as ctx_resp:
+                              ctx_data = json.loads(ctx_resp.read())
+                          context_info = {
+                              'type': ctx.get('type', ''),
+                              'name': ctx_data.get('name', ''),
+                              'url': ctx_url
+                          }
+                      except Exception:
+                          pass
+              if context_info:
+                  result['context'] = context_info
 
           os.makedirs('_data', exist_ok=True)
           with open('_data/now-playing.json', 'w') as f:

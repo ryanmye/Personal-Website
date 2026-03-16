@@ -4,6 +4,10 @@ One-time script to obtain a Spotify refresh token for the GitHub Actions workflo
 Run this locally, then add the printed refresh token as SPOTIFY_REFRESH_TOKEN in
 GitHub repo Settings → Secrets and variables → Actions.
 
+Before running: In your Spotify app (developer.spotify.com/dashboard), add this
+redirect URI: http://127.0.0.1:8888/callback
+(Spotify requires 127.0.0.1, not localhost.)
+
 Usage:
   python scripts/get-spotify-refresh-token.py
   # Or with env vars:
@@ -18,7 +22,7 @@ import urllib.parse
 import urllib.request
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-REDIRECT_URI = "http://localhost:8888/callback"
+REDIRECT_URI = "http://127.0.0.1:8888/callback"
 SCOPE = "user-read-recently-played"
 PORT = 8888
 
@@ -88,7 +92,7 @@ def main():
         pass
 
     print("2. Log in to Spotify and approve the app.")
-    print("3. Waiting for redirect on http://localhost:8888/callback ...\n")
+    print("3. Waiting for redirect on http://127.0.0.1:8888/callback ...\n")
 
     server = HTTPServer(("", PORT), CallbackHandler)
     server.handle_request()
