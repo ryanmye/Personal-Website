@@ -1,20 +1,16 @@
 {
   "track": {
-    "name": "All I Did Was Dream of You (feat. The Mar\u00edas)",
-    "url": "https://open.spotify.com/track/0qWoOHqTirzo59FQ9eoECH",
+    "name": "Better Than I Know Myself",
+    "url": "https://open.spotify.com/track/5VNkuiCzqFMW37IANGQ1W7",
     "artists": [
       {
-        "name": "beabadoobee",
-        "url": "https://open.spotify.com/artist/35l9BRT7MXmM8bv2WDQiyB"
-      },
-      {
-        "name": "The Mar\u00edas",
-        "url": "https://open.spotify.com/artist/2sSGPbdZJkaSE2AbcGOACx"
+        "name": "Del Water Gap",
+        "url": "https://open.spotify.com/artist/0xPoVNPnxIIUS1vrxAYV00"
       }
     ],
-    "played_at": "2026-03-17T01:00:37.484Z"
+    "played_at": "2026-03-17T01:54:51.800Z"
   },
-  "fetched_at": "2026-03-17T01:03:10Z",
+  "fetched_at": "2026-03-17T03:44:21Z",
   "context": {
     "type": "playlist",
     "name": "floating",
