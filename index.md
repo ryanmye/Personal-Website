@@ -18,6 +18,7 @@ title: "About"
       <a href="https://github.com/ryanmye" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
       <a href="https://www.linkedin.com/in/rmy43/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
     </div>
+    <p class="profile-faith-note">Jesus is King</p>
   </div>
 
   <div class="profile-right">

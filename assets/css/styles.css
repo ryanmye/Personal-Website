@@ -301,6 +301,8 @@ main {
 .footer-copy {
   color: var(--muted);
   font-size: 0.83rem;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .footer-links {
@@ -313,6 +315,22 @@ main {
   font-family: 'Inter', sans-serif;
   font-size: 0.83rem;
   transition: color 0.15s;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.footer-faith-note {
+  color: var(--muted);
+  font-size: 0.83rem;
+  text-align: center;
+  flex: 1;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .footer-links a:hover {
@@ -406,6 +424,12 @@ main {
 
 .profile-social a:hover {
   color: var(--accent);
+}
+
+.profile-faith-note {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
 .profile-right {
