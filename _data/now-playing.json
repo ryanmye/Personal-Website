@@ -1,16 +1,16 @@
 {
   "track": {
-    "name": "Numb",
-    "url": "https://open.spotify.com/track/6Ijmj8Z0L31hCp5pLZnT5U",
+    "name": "My Love Mine All Mine",
+    "url": "https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3",
     "artists": [
       {
-        "name": "Men I Trust",
-        "url": "https://open.spotify.com/artist/3zmfs9cQwzJl575W1ZYXeT"
+        "name": "Mitski",
+        "url": "https://open.spotify.com/artist/2uYWxilOVlUdk4oV9DvwqK"
       }
     ],
-    "played_at": "2026-03-18T04:29:19.253Z"
+    "played_at": "2026-03-18T15:42:07.369Z"
   },
-  "fetched_at": "2026-03-18T14:13:18Z",
+  "fetched_at": "2026-03-18T15:43:54Z",
   "context": {
     "type": "playlist",
     "name": "floating",
