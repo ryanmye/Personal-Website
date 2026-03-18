@@ -1,19 +1,19 @@
 {
   "track": {
-    "name": "My Love Mine All Mine",
-    "url": "https://open.spotify.com/track/3vkCueOmm7xQDoJ17W1Pm3",
+    "name": "Sunsetz",
+    "url": "https://open.spotify.com/track/0yuAWlxq59xT3agQ965OxE",
     "artists": [
       {
-        "name": "Mitski",
-        "url": "https://open.spotify.com/artist/2uYWxilOVlUdk4oV9DvwqK"
+        "name": "Cigarettes After Sex",
+        "url": "https://open.spotify.com/artist/1QAJqy2dA3ihHBFIHRphZj"
       }
     ],
-    "played_at": "2026-03-18T15:42:07.369Z"
+    "played_at": "2026-03-18T16:24:57.674Z"
   },
-  "fetched_at": "2026-03-18T15:43:54Z",
+  "fetched_at": "2026-03-18T16:46:51Z",
   "context": {
     "type": "playlist",
     "name": "floating",
-    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1773792000001&mode=enhanced"
+    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1773878400001&mode=enhanced"
   }
 }
