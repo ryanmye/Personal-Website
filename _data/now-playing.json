@@ -1,19 +1,19 @@
 {
   "track": {
-    "name": "Georgia Walks",
-    "url": "https://open.spotify.com/track/46ewa3Cu9oEqxNnh0LRWxs",
+    "name": "I Remember Clifford",
+    "url": "https://open.spotify.com/track/4ojZuJ575GlwN2weuWDr8z",
     "artists": [
       {
-        "name": "Hans Williams",
-        "url": "https://open.spotify.com/artist/3SEkDN2vusR7CIyehzfJaj"
+        "name": "Benny Golson",
+        "url": "https://open.spotify.com/artist/78NDaMzmcDKjt7mkXs7AuG"
       }
     ],
-    "played_at": "2026-03-18T22:15:51.853Z"
+    "played_at": "2026-03-18T22:48:25.083Z"
   },
-  "fetched_at": "2026-03-18T22:21:14Z",
+  "fetched_at": "2026-03-18T22:53:31Z",
   "context": {
     "type": "playlist",
-    "name": "floating",
-    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1773878400001&mode=enhanced"
+    "name": "Jazz Noir Cowboy Bebop Vibes",
+    "url": "https://open.spotify.com/playlist/5q5wQFuwmyEBhX6U8ng4K2"
   }
 }
