@@ -1,23 +1,19 @@
 {
   "track": {
-    "name": "Prisoner Of Love",
-    "url": "https://open.spotify.com/track/6lO3wImM4oMAhOzDptCqa6",
+    "name": "we never dated",
+    "url": "https://open.spotify.com/track/0t1fdMrn7JOg9DDsT95bxt",
     "artists": [
       {
-        "name": "Coleman Hawkins",
-        "url": "https://open.spotify.com/artist/0JM134st8VY7Ld9T2wQiH0"
-      },
-      {
-        "name": "Ben Webster",
-        "url": "https://open.spotify.com/artist/34W7ZCX0LZeJd8q6boKGOk"
+        "name": "sombr",
+        "url": "https://open.spotify.com/artist/4G9NDjRyZFDlJKMRL8hx3S"
       }
     ],
-    "played_at": "2026-03-20T07:22:20.810Z"
+    "played_at": "2026-03-20T07:46:48.157Z"
   },
-  "fetched_at": "2026-03-20T07:27:02Z",
+  "fetched_at": "2026-03-20T08:00:00Z",
   "context": {
     "type": "playlist",
-    "name": "Jazz Noir Cowboy Bebop Vibes",
-    "url": "https://open.spotify.com/playlist/5q5wQFuwmyEBhX6U8ng4K2"
+    "name": "floating",
+    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1773964800003&mode=enhanced"
   }
 }
