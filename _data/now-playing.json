@@ -1,16 +1,16 @@
 {
   "track": {
-    "name": "Staying",
-    "url": "https://open.spotify.com/track/3tcCT8WhAIeRW2Ey9M4bL5",
+    "name": "Georgia",
+    "url": "https://open.spotify.com/track/5sfvzgf96i6nLyLELnrLZ6",
     "artists": [
       {
-        "name": "Lizzy McAlpine",
-        "url": "https://open.spotify.com/artist/1GmsPCcpKgF9OhlNXjOsbS"
+        "name": "Vance Joy",
+        "url": "https://open.spotify.com/artist/10exVja0key0uqUkk6LJRT"
       }
     ],
-    "played_at": "2026-03-20T21:31:35.547Z"
+    "played_at": "2026-03-21T17:42:41.187Z"
   },
-  "fetched_at": "2026-03-21T17:15:57Z",
+  "fetched_at": "2026-03-21T17:46:29Z",
   "context": {
     "type": "playlist",
     "name": "48+2",
