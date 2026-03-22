@@ -1,18 +1,14 @@
 {
   "track": {
-    "name": "Julia's Song (feat. Elena Satine)",
-    "url": "https://open.spotify.com/track/3ADTWncwDSDT5TvbRgI6vt",
+    "name": "Stardust",
+    "url": "https://open.spotify.com/track/2KfxK9sO9xnjeFxizuXljy",
     "artists": [
       {
-        "name": "SEATBELTS",
-        "url": "https://open.spotify.com/artist/3U3zr5PCRa9ty74uN46iBa"
-      },
-      {
-        "name": "Elena Satine",
-        "url": "https://open.spotify.com/artist/1sj1fhz7j55cuyqrlYu2uP"
+        "name": "Ben Webster",
+        "url": "https://open.spotify.com/artist/34W7ZCX0LZeJd8q6boKGOk"
       }
     ],
-    "played_at": "2026-03-22T22:48:21.780Z"
+    "played_at": "2026-03-22T23:03:20.255Z"
   },
-  "fetched_at": "2026-03-22T22:48:33Z"
+  "fetched_at": "2026-03-22T23:16:04Z"
 }
