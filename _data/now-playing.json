@@ -1,18 +1,19 @@
 {
   "track": {
-    "name": "Solitude",
-    "url": "https://open.spotify.com/track/1Ukp5g1LebPFr7iKFJExUI",
+    "name": "Worthy",
+    "url": "https://open.spotify.com/track/7qqtTPQIMXAFubamFBPHG5",
     "artists": [
       {
-        "name": "The Jazz Seekers",
-        "url": "https://open.spotify.com/artist/1K6IcbnI4HSwAjecks1vG1"
-      },
-      {
-        "name": "Niclas Knudsen",
-        "url": "https://open.spotify.com/artist/7ErSwiH3ISJy905okfPJU5"
+        "name": "Elevation Worship",
+        "url": "https://open.spotify.com/artist/3YCKuqpv9nCsIhJ2v8SMix"
       }
     ],
-    "played_at": "2026-03-22T06:13:26.526Z"
+    "played_at": "2026-03-22T19:18:13.040Z"
   },
-  "fetched_at": "2026-03-22T18:59:02Z"
+  "fetched_at": "2026-03-22T19:24:37Z",
+  "context": {
+    "type": "playlist",
+    "name": "surrender my life",
+    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq"
+  }
 }
