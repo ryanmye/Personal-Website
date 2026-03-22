@@ -1,19 +1,18 @@
 {
   "track": {
-    "name": "Numb",
-    "url": "https://open.spotify.com/track/6Ijmj8Z0L31hCp5pLZnT5U",
+    "name": "Julia's Song (feat. Elena Satine)",
+    "url": "https://open.spotify.com/track/3ADTWncwDSDT5TvbRgI6vt",
     "artists": [
       {
-        "name": "Men I Trust",
-        "url": "https://open.spotify.com/artist/3zmfs9cQwzJl575W1ZYXeT"
+        "name": "SEATBELTS",
+        "url": "https://open.spotify.com/artist/3U3zr5PCRa9ty74uN46iBa"
+      },
+      {
+        "name": "Elena Satine",
+        "url": "https://open.spotify.com/artist/1sj1fhz7j55cuyqrlYu2uP"
       }
     ],
-    "played_at": "2026-03-22T22:10:47.565Z"
+    "played_at": "2026-03-22T22:48:21.780Z"
   },
-  "fetched_at": "2026-03-22T22:13:21Z",
-  "context": {
-    "type": "playlist",
-    "name": "floating",
-    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1774224000001&mode=enhanced"
-  }
+  "fetched_at": "2026-03-22T22:48:33Z"
 }
