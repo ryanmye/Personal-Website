@@ -1,24 +1,20 @@
 {
   "track": {
-    "name": "Hosanna - Live",
-    "url": "https://open.spotify.com/track/0Emspyx2N1o6afDjo27JnR",
+    "name": "Canvas And Clay - Live",
+    "url": "https://open.spotify.com/track/4Woit6kXxixnS2jduLUcy4",
     "artists": [
       {
-        "name": "UPPERROOM",
-        "url": "https://open.spotify.com/artist/107CG0UhUl9GJnPwF83N63"
+        "name": "Pat Barrett",
+        "url": "https://open.spotify.com/artist/0289SkqAn0iOohwm0pIHv3"
       },
       {
-        "name": "Ashley Bailey",
-        "url": "https://open.spotify.com/artist/0mCGACx1tzi9BRx1KX0OXR"
-      },
-      {
-        "name": "Justus Tams",
-        "url": "https://open.spotify.com/artist/2IiwIcF2ugOhgrqg4IH5Vk"
+        "name": "Ben Smith",
+        "url": "https://open.spotify.com/artist/3Fh5jeRl6cDZyDwVS7iwX5"
       }
     ],
-    "played_at": "2026-03-22T19:32:09.150Z"
+    "played_at": "2026-03-22T20:06:41.345Z"
   },
-  "fetched_at": "2026-03-22T19:43:43Z",
+  "fetched_at": "2026-03-22T20:13:39Z",
   "context": {
     "type": "playlist",
     "name": "surrender my life",
