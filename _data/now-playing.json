@@ -1,20 +1,16 @@
 {
   "track": {
-    "name": "Canvas And Clay - Live",
-    "url": "https://open.spotify.com/track/4Woit6kXxixnS2jduLUcy4",
+    "name": "Make Room - Live",
+    "url": "https://open.spotify.com/track/4CJAaPdYuz8pwexNaYAF3j",
     "artists": [
       {
-        "name": "Pat Barrett",
-        "url": "https://open.spotify.com/artist/0289SkqAn0iOohwm0pIHv3"
-      },
-      {
-        "name": "Ben Smith",
-        "url": "https://open.spotify.com/artist/3Fh5jeRl6cDZyDwVS7iwX5"
+        "name": "Community Music",
+        "url": "https://open.spotify.com/artist/3JCosyk2TCRwvbOpSLzR5R"
       }
     ],
-    "played_at": "2026-03-22T20:06:41.345Z"
+    "played_at": "2026-03-22T20:48:08.615Z"
   },
-  "fetched_at": "2026-03-22T20:13:39Z",
+  "fetched_at": "2026-03-22T20:48:23Z",
   "context": {
     "type": "playlist",
     "name": "surrender my life",
