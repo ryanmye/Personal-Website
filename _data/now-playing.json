@@ -1,14 +1,19 @@
 {
   "track": {
-    "name": "Rush",
-    "url": "https://open.spotify.com/track/2PXnV9PBUGW4v5u6WJpCjG",
+    "name": "Seven",
+    "url": "https://open.spotify.com/track/5QvditjxADt1HMKPgaMjJm",
     "artists": [
       {
-        "name": "SEATBELTS",
-        "url": "https://open.spotify.com/artist/3U3zr5PCRa9ty74uN46iBa"
+        "name": "Men I Trust",
+        "url": "https://open.spotify.com/artist/3zmfs9cQwzJl575W1ZYXeT"
       }
     ],
-    "played_at": "2026-03-23T04:15:52.159Z"
+    "played_at": "2026-03-23T15:30:58.969Z"
   },
-  "fetched_at": "2026-03-23T14:06:01Z"
+  "fetched_at": "2026-03-23T15:31:53Z",
+  "context": {
+    "type": "playlist",
+    "name": "floating",
+    "url": "https://open.spotify.com/playlist/607PxSGVeYpWMFiqtNgW6f?sessionId=1774310400001&mode=enhanced"
+  }
 }
