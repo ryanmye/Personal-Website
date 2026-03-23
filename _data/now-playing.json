@@ -1,23 +1,27 @@
 {
   "track": {
-    "name": "Pontiac",
-    "url": "https://open.spotify.com/track/4LoL7Rkeq3kJALalToGWZY",
+    "name": "Starship Syncopation",
+    "url": "https://open.spotify.com/track/0p1Mp6sT4Nzq3DWnZPvqs8",
     "artists": [
-      {
-        "name": "Huntertones",
-        "url": "https://open.spotify.com/artist/3tv8xMO0AkcqN9Th8KHyGd"
-      },
       {
         "name": "Cory Wong",
         "url": "https://open.spotify.com/artist/6xt9sJmmyYwWkJv8A6ssiU"
+      },
+      {
+        "name": "Metropole Orkest",
+        "url": "https://open.spotify.com/artist/7JYdpWAsiqzrmMB3qxkEbI"
+      },
+      {
+        "name": "Jules Buckley",
+        "url": "https://open.spotify.com/artist/5gGbAKDXhDoBXIJe8SuBvX"
       }
     ],
-    "played_at": "2026-03-23T22:55:11.548Z"
+    "played_at": "2026-03-23T23:06:03.536Z"
   },
-  "fetched_at": "2026-03-23T22:56:12Z",
+  "fetched_at": "2026-03-23T23:23:48Z",
   "context": {
     "type": "playlist",
     "name": "in the pocket",
-    "url": "https://open.spotify.com/playlist/4rv6sUasas98iJagvsGRFi?sessionId=1774310400001&mode=enhanced"
+    "url": "https://open.spotify.com/playlist/4rv6sUasas98iJagvsGRFi?sessionId=1774310400002&mode=enhanced"
   }
 }
