@@ -1,27 +1,27 @@
 {
   "track": {
-    "name": "Starship Syncopation",
-    "url": "https://open.spotify.com/track/0p1Mp6sT4Nzq3DWnZPvqs8",
+    "name": "What a Beautiful Name - Live from Madison Square Garden",
+    "url": "https://open.spotify.com/track/32lOqy2rbO3kGTVcEBsL9q",
     "artists": [
       {
-        "name": "Cory Wong",
-        "url": "https://open.spotify.com/artist/6xt9sJmmyYwWkJv8A6ssiU"
+        "name": "Hillsong UNITED",
+        "url": "https://open.spotify.com/artist/74cb3MG0x0BOnYNW1uXYnM"
       },
       {
-        "name": "Metropole Orkest",
-        "url": "https://open.spotify.com/artist/7JYdpWAsiqzrmMB3qxkEbI"
+        "name": "TAYA",
+        "url": "https://open.spotify.com/artist/3D04fb59z3ANxVaeHBfxtW"
       },
       {
-        "name": "Jules Buckley",
-        "url": "https://open.spotify.com/artist/5gGbAKDXhDoBXIJe8SuBvX"
+        "name": "Jad Gillies",
+        "url": "https://open.spotify.com/artist/5U4Girw0uPUEsQx5GzRaKU"
       }
     ],
-    "played_at": "2026-03-23T23:06:03.536Z"
+    "played_at": "2026-03-24T01:53:37.131Z"
   },
-  "fetched_at": "2026-03-24T01:00:40Z",
+  "fetched_at": "2026-03-24T03:44:26Z",
   "context": {
     "type": "playlist",
-    "name": "in the pocket",
-    "url": "https://open.spotify.com/playlist/4rv6sUasas98iJagvsGRFi?sessionId=1774310400002&mode=enhanced"
+    "name": "Live Christian music\ud83d\ude0d",
+    "url": "https://open.spotify.com/playlist/2FAohgufLtV8B9vDkm3hap"
   }
 }
