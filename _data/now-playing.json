@@ -1,23 +1,19 @@
 {
   "track": {
-    "name": "Melody",
-    "url": "https://open.spotify.com/track/6GnvrHsBX77fnYTgJtMcti",
+    "name": "\u6c89\u6ca6\u4e0e\u9050\u60f3",
+    "url": "https://open.spotify.com/track/33YtoBKspZUPs0MLscWLE9",
     "artists": [
       {
-        "name": "Kipes",
-        "url": "https://open.spotify.com/artist/3sQ4YHF0SRgQTNEswO8KTf"
-      },
-      {
-        "name": "Ziv",
-        "url": "https://open.spotify.com/artist/3YURVpnxVzqFYUTIy5HqcO"
+        "name": "C.H\u00d8PE",
+        "url": "https://open.spotify.com/artist/5B0RV4kEurN7Ev16lf3VqN"
       }
     ],
-    "played_at": "2026-03-25T15:37:56.731Z"
+    "played_at": "2026-03-25T16:17:28.114Z"
   },
-  "fetched_at": "2026-03-25T15:40:05Z",
+  "fetched_at": "2026-03-25T16:51:51Z",
   "context": {
     "type": "playlist",
-    "name": "\u5f88\u8d5echinese rnb",
-    "url": "https://open.spotify.com/playlist/7HG2wGVEGUqIWvYBb85EVZ"
+    "name": "chinese rnb \u2601\ufe0f",
+    "url": "https://open.spotify.com/playlist/7gPJDy3cH5ApojyPzSQ34L"
   }
 }
