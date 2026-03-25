@@ -1,16 +1,16 @@
 {
   "track": {
-    "name": "\u504f\u611b\u4eba\u9593\u7159\u706b",
-    "url": "https://open.spotify.com/track/3Y2SM6oNVJQKRgRmtdfSBW",
+    "name": "\u8f38\u7d66\u4f60 - \u300c\u6d6a\u6f2b\u8f38\u7d66\u4f60\u300d\u7247\u5c3e\u66f2",
+    "url": "https://open.spotify.com/track/1zay1xea7DB6GkIl03trd4",
     "artists": [
       {
-        "name": "\u694a\u7d2b\uff1b\u6a80\u5065\u6b21",
-        "url": "https://open.spotify.com/artist/5SsO2pIlX9601wvWREg11N"
+        "name": "Marcus Chang",
+        "url": "https://open.spotify.com/artist/5GTkwiuc6ayldeGjQVAN4n"
       }
     ],
-    "played_at": "2026-03-25T21:57:29.933Z"
+    "played_at": "2026-03-25T22:31:31.302Z"
   },
-  "fetched_at": "2026-03-25T21:58:01Z",
+  "fetched_at": "2026-03-25T22:32:02Z",
   "context": {
     "type": "playlist",
     "name": "\u7535\u89c6\u5267OST",
