@@ -1,19 +1,14 @@
 {
   "track": {
-    "name": "Eze Ebube II",
-    "url": "https://open.spotify.com/track/5VqbyQDOlTs9CwYnDOfpRh",
+    "name": "Rivi\u00e8re",
+    "url": "https://open.spotify.com/track/1DwfVWRVFTIwJxWGgzJo8b",
     "artists": [
       {
-        "name": "Neon Adejo",
-        "url": "https://open.spotify.com/artist/1Ywypkj7wYHenVdKnsp3Nn"
+        "name": "Julien Trevant",
+        "url": "https://open.spotify.com/artist/1hbSId3a071gC1M9PtyrLO"
       }
     ],
-    "played_at": "2026-03-25T23:06:31.693Z"
+    "played_at": "2026-03-26T04:05:08.527Z"
   },
-  "fetched_at": "2026-03-26T01:11:00Z",
-  "context": {
-    "type": "playlist",
-    "name": "surrender my life",
-    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq?sessionId=1774483200002&mode=enhanced"
-  }
+  "fetched_at": "2026-03-26T04:07:12Z"
 }
