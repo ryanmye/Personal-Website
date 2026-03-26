@@ -1,23 +1,14 @@
 {
   "track": {
-    "name": "Elohim - Live",
-    "url": "https://open.spotify.com/track/15VivzmIja8IDxDE7zxRwC",
+    "name": "En tu mirada",
+    "url": "https://open.spotify.com/track/4Hw4xLW5SddpSP1BqDi3Qb",
     "artists": [
       {
-        "name": "Bethel Music",
-        "url": "https://open.spotify.com/artist/26T4yOaOoFJvUvxR87Y9HO"
-      },
-      {
-        "name": "Noah Paul Harrison",
-        "url": "https://open.spotify.com/artist/3n04pKYj4LrOJ9eUsQGXn4"
+        "name": "Jon Albreit",
+        "url": "https://open.spotify.com/artist/7HUDHULnPyXARDfZzsx5xc"
       }
     ],
-    "played_at": "2026-03-26T06:30:31.485Z"
+    "played_at": "2026-03-26T14:16:45.781Z"
   },
-  "fetched_at": "2026-03-26T12:44:46Z",
-  "context": {
-    "type": "playlist",
-    "name": "surrender my life",
-    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq?sessionId=1774483200002&mode=enhanced"
-  }
+  "fetched_at": "2026-03-26T14:18:10Z"
 }
