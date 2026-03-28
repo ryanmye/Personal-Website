@@ -14,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Fetch recently played track
         env:
@@ -110,7 +112,10 @@ jobs:
           git diff --staged --quiet && exit 0
           # Amend the previous commit if it was also a bot update, so only one
           # rolling bot commit appears in the history instead of hundreds.
-          if [ "$(git log -1 --format='%an')" = "github-actions[bot]" ]; then
+          # Guard: never amend merge commits (multiple parents) — that destroys branch topology.
+          PARENT_COUNT=$(git cat-file -p HEAD | grep -c '^parent ')
+          LAST_AUTHOR=$(git log -1 --format='%an')
+          if [ "$PARENT_COUNT" -eq 1 ] && [ "$LAST_AUTHOR" = "github-actions[bot]" ]; then
             git commit --amend --no-edit
           else
             git commit -m "chore: update Spotify now-playing data [skip ci]"
