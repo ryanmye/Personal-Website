@@ -1,19 +1,19 @@
 {
   "track": {
-    "name": "This Is How I Thank The Lord",
-    "url": "https://open.spotify.com/track/0xHdrRs3i00vBbXzx0Hq67",
+    "name": "How Great Thou Art - Live",
+    "url": "https://open.spotify.com/track/31Pg9jmlYPwG5jCEBbRwE7",
     "artists": [
       {
-        "name": "Mosaic MSC",
-        "url": "https://open.spotify.com/artist/4hAridhpYF50cbO6o7jB3b"
+        "name": "Phil Wickham",
+        "url": "https://open.spotify.com/artist/5d1JhBfyb58upMXCZOdbQu"
       }
     ],
-    "played_at": "2026-04-02T07:16:31.381Z"
+    "played_at": "2026-04-07T15:47:26.270Z"
   },
-  "fetched_at": "2026-04-02T12:43:03Z",
+  "fetched_at": "2026-04-07T15:50:34Z",
   "context": {
     "type": "playlist",
     "name": "surrender my life",
-    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq?sessionId=1775088000001&mode=enhanced"
+    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq"
   }
 }
