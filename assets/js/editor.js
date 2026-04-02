@@ -33,10 +33,38 @@
       .replace(/^-+|-+$/g, '') || 'post';
   }
 
+  // Track captions for newly inserted images so we can restore them if the
+  // Toast UI WYSIWYG round-trip strips the *caption* lines.
+  var insertedCaptions = {};
+
+  function restoreCaptions(md) {
+    if (!Object.keys(insertedCaptions).length) return md;
+    var lines = md.split('\n');
+    var result = [];
+    for (var i = 0; i < lines.length; i++) {
+      result.push(lines[i]);
+      // Match image line: ![alt](url)
+      var m = lines[i].match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/);
+      if (!m) continue;
+      var src = m[2].split(apiOrigin).join('');
+      var caption = insertedCaptions[src];
+      if (!caption) continue;
+      // Check if next non-blank line is already a caption
+      var j = i + 1;
+      while (j < lines.length && lines[j].trim() === '') j++;
+      if (j < lines.length && /^\*(.+)\*$|^_(.+)_$/.test(lines[j].trim())) continue;
+      // Caption is missing — re-insert it
+      result.push('');
+      result.push('*' + caption + '*');
+    }
+    return result.join('\n');
+  }
+
   function getBodyValue() {
     var val = editor ? editor.getMarkdown() : bodyInput.value;
     // Strip API origin from image URLs so saved markdown uses relative paths
-    return val.split(apiOrigin).join('');
+    val = val.split(apiOrigin).join('');
+    return restoreCaptions(val);
   }
 
   function setBodyValue(value) {
@@ -49,7 +77,6 @@
 
   function insertAtCursor(snippet) {
     if (editor) {
-      // insertText escapes HTML; append to markdown source directly
       var md = editor.getMarkdown();
       editor.setMarkdown(md + snippet);
       return;
@@ -92,6 +119,14 @@
     dateInput.value = formatDateForInput(post.date);
     tagsInput.value = (post.tags || []).join(', ');
     draftInput.checked = currentKind === 'draft' || !!post.draft;
+    // Seed caption map from the post's images frontmatter so re-saving
+    // doesn't lose captions that the WYSIWYG round-trip strips.
+    insertedCaptions = {};
+    if (post.images && post.images.length) {
+      post.images.forEach(function (img) {
+        if (img.src && img.caption) insertedCaptions[img.src] = img.caption;
+      });
+    }
     setBodyValue(post.body || '');
   }
 
@@ -242,6 +277,8 @@
         var snippet = '\n\n![' + altText + '](' + displayUrl + ')';
         if (caption) {
           snippet += '\n\n*' + caption + '*';
+          // Track caption so we can restore it if the WYSIWYG round-trip strips it
+          insertedCaptions[url] = caption;
         }
         snippet += '\n\n';
         insertAtCursor(snippet);

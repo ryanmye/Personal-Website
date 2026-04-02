@@ -15,7 +15,7 @@
   --surface:     #FFFFFF;
   --border:      #DDD6CE;
   --text:        #2A2218;
-  --muted:       #8A7C6E;
+  --muted:       #7A6C5E;
   --accent:      #5C4F43;
   --accent-soft: #EDE6DC;
   --accent-dark: #3A2E24;
@@ -408,9 +408,36 @@ main {
   border-bottom: 0.5px solid var(--border);
 }
 
+/* WYSIWYG pane: always light background, force dark text so dark themes
+   don't bleed light-on-white inherited colors */
 .toastui-editor-contents {
   font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
+  color: #222222;
+  background: #FFFFFF;
+}
+
+/* Markdown pane: force readable colors so dark themes don't cause
+   light-on-white or dark-on-dark text */
+.toastui-editor-md-container {
+  background: var(--surface);
+}
+.toastui-editor-md-container .toastui-editor-md-splitter {
+  background-color: var(--border);
+}
+.toastui-editor-defaultUI .ProseMirror {
+  color: #222222;
+}
+.toastui-editor-md-container .CodeMirror {
+  background: var(--surface);
+  color: var(--text);
+}
+.toastui-editor-md-container .CodeMirror .cm-header {
+  color: var(--text);
+}
+.toastui-editor-md-container .CodeMirror .cm-string,
+.toastui-editor-md-container .CodeMirror .cm-link {
+  color: var(--accent);
 }
 
 .editor-images {

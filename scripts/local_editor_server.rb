@@ -304,6 +304,36 @@ helpers do
     end
   end
 
+  # Promote images from drafts/ to posts/ when publishing. Rewrites URLs in
+  # both the body string and the images array. Returns the updated body.
+  def promote_draft_images(body, images)
+    body = body.to_s.dup
+    draft_re = %r{/assets/images/drafts/([^\s\)"']+)}
+    body.scan(draft_re).flatten.uniq.each do |filename|
+      src = File.join(DRAFT_IMAGES_DIR, filename)
+      dest = File.join(IMAGES_DIR, filename)
+      if File.exist?(src)
+        FileUtils.mkdir_p(File.dirname(dest))
+        FileUtils.cp(src, dest)
+        File.delete(src) rescue nil
+      end
+      body.gsub!("/assets/images/drafts/#{filename}", "/assets/images/posts/#{filename}")
+    end
+    images.each do |img|
+      next unless img['src'].to_s.include?('/assets/images/drafts/')
+      fname = img['src'].split('/assets/images/drafts/').last
+      src = File.join(DRAFT_IMAGES_DIR, fname)
+      dest = File.join(IMAGES_DIR, fname)
+      if File.exist?(src)
+        FileUtils.mkdir_p(File.dirname(dest))
+        FileUtils.cp(src, dest)
+        File.delete(src) rescue nil
+      end
+      img['src'] = img['src'].gsub('/assets/images/drafts/', '/assets/images/posts/')
+    end
+    body
+  end
+
   # Extract markdown images that embed base64 data URLs:
   #   ![alt](data:image/png;base64,AAAA...)
   # Writes decoded files under drafts/posts images folder and rewrites URLs.
@@ -426,6 +456,7 @@ post '/posts' do
 
   body = extract_base64_images(body, slug: slug, draft: draft)
   promote_temp_images(body, images)
+  body = promote_draft_images(body, images) unless draft
   images = merge_images(extract_body_images(body), images)
 
   front_matter = +"---\n"
@@ -511,6 +542,7 @@ put '/posts/:kind/:slug' do
       end
     end
   else
+    body = promote_draft_images(body, images)
     date_prefix = time.strftime('%Y-%m-%d')
     filename = "#{date_prefix}-#{slug}.md"
     new_path = File.join(POSTS_DIR, filename)
@@ -624,34 +656,7 @@ post '/publish/:slug' do
   tags = Array(data['tags'] || []).map { |t| t.to_s.strip }.reject(&:empty?)
   images = parse_images_from_data(data)
 
-  # Promote draft images: copy from assets/images/drafts -> assets/images/posts
-  # and rewrite URLs in the body and images array.
-  body = data['body'].to_s.dup
-  draft_image_regex = %r{/assets/images/drafts/([^\s\)]+)}
-  body.scan(draft_image_regex).flatten.uniq.each do |filename|
-    src = File.join(DRAFT_IMAGES_DIR, filename)
-    dest = File.join(IMAGES_DIR, filename)
-    if File.exist?(src)
-      FileUtils.mkdir_p(File.dirname(dest))
-      FileUtils.cp(src, dest)
-      File.delete(src) rescue nil
-    end
-    body.gsub!("/assets/images/drafts/#{filename}", "/assets/images/posts/#{filename}")
-  end
-  images.each do |img|
-    if img['src'].include?('/assets/images/drafts/')
-      fname = img['src'].split('/assets/images/drafts/').last
-      src = File.join(DRAFT_IMAGES_DIR, fname)
-      dest = File.join(IMAGES_DIR, fname)
-      if File.exist?(src)
-        FileUtils.mkdir_p(File.dirname(dest))
-        FileUtils.cp(src, dest)
-        File.delete(src) rescue nil
-      end
-      img['src'] = img['src'].gsub('/assets/images/drafts/', '/assets/images/posts/')
-    end
-  end
-
+  body = promote_draft_images(body, images)
   promote_temp_images(body, images)
   images = merge_images(extract_body_images(body), images)
 
