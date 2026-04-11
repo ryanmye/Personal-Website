@@ -2,6 +2,7 @@
 layout: default
 title: "Gallery"
 permalink: /gallery/
+description: "Photo gallery from Ryan Ye's blog — campus life, travel, and events."
 ---
 
 <div class="page-header">

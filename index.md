@@ -1,6 +1,7 @@
 ---
 layout: default
-title: "About"
+title: "CS @ Cornell"
+description: "Ryan Ye — CS student at Cornell building computer vision and ML systems. Projects, research, publications, and blog."
 ---
 
 <div class="profile-section">

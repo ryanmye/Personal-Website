@@ -2,6 +2,31 @@
 <html lang="en">
 <head>
   {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ page.title | jsonify }},
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author }}",
+      "url": "{{ site.url }}{{ site.baseurl }}/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ site.author }}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "url": "{{ page.url | absolute_url }}"{% if page.images and page.images.size > 0 %},
+    "image": "{{ page.images[0].src | absolute_url }}"{% endif %}{% if page.tags and page.tags.size > 0 %},
+    "keywords": {{ page.tags | jsonify }}{% endif %}
+  }
+  </script>
 </head>
 <body>
 <div class="site-wrapper">

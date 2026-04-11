@@ -2,6 +2,7 @@
 layout: default
 title: "Research"
 permalink: /research/
+description: "Ryan Ye's research in computer vision, machine learning, and AI for animal behavior at Cornell."
 ---
 
 <div class="page-header">

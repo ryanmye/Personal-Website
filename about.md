@@ -2,6 +2,7 @@
 layout: default
 title: "About"
 permalink: /about/
+description: "About Ryan Ye — undergraduate in Computer Science at Cornell University, researching machine learning and computer vision."
 ---
 
 <div class="page-header">

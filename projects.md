@@ -2,6 +2,7 @@
 layout: default
 title: "Projects"
 permalink: /projects/
+description: "Projects by Ryan Ye — computer vision for animal behavior, hackathon apps, AI productivity tools, and more."
 ---
 
 <div class="page-header">

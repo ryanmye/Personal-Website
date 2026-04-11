@@ -2,6 +2,7 @@
 layout: default
 title: "Publications"
 permalink: /publications/
+description: "Publications by Ryan Ye — research papers on AI, computer vision, and economics."
 ---
 
 <div class="page-header">

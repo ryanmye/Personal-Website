@@ -6,8 +6,13 @@ github_username: "ryanmye"
 linkedin_username: "rmy43"
 url: "https://ryanmye.github.io"
 baseurl: "/aboutme"
+twitter_username: "ryanmye0"
 
 theme: null
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
 
 markdown: kramdown
 highlighter: rouge

@@ -2,6 +2,7 @@
 layout: default
 title: "Blog"
 permalink: /blog/
+description: "Blog posts by Ryan Ye on research, machine learning, life at Cornell, and side projects."
 ---
 
 <div class="page-header">

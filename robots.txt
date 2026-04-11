@@ -87,3 +87,5 @@ Allow: /
 # Default: allow other crawlers (search engines, etc.)
 User-agent: *
 Allow: /
+
+Sitemap: https://ryanmye.github.io/aboutme/sitemap.xml

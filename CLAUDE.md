@@ -107,12 +107,14 @@ bundle exec jekyll build --config _config.yml,_config_prod.yml
 
 ## Configuration Files
 
-### _config.yml (35 lines)
+### _config.yml (~50 lines)
 Main Jekyll configuration. Key settings:
 - `title: "Ryan Ye"`, `baseurl: "/aboutme"`, `url: "https://ryanmye.github.io"`
+- `twitter_username: "ryanmye0"` — used for Twitter Card meta tags
 - `markdown: kramdown` with GFM input, Rouge syntax highlighter
 - `permalink: /blog/:year/:month/:day/:title/`
 - `local_editor: true` — enables editor nav link and page in development
+- `plugins: [jekyll-sitemap, jekyll-feed]` — auto-generates `sitemap.xml` and `feed.xml`
 - Default layout `post` applied to all files in `_posts/`
 - Excludes: README.md, Gemfile, Gemfile.lock, node_modules, vendor
 
@@ -122,7 +124,7 @@ Production overlay (used in CI build). Overrides:
 - Excludes `editor.md` and `scripts/local_editor_server.rb` from build
 
 ### Gemfile
-Dependencies: `jekyll ~> 3.8`, `webrick ~> 1.7`, `kramdown-parser-gfm`, `ffi ~> 1.15`, `sinatra ~> 3.0` (development group)
+Dependencies: `jekyll ~> 3.8`, `webrick ~> 1.7`, `kramdown-parser-gfm`, `ffi ~> 1.15`, `jekyll-sitemap`, `jekyll-feed`, `sinatra ~> 3.0` (development group)
 
 ---
 
@@ -131,8 +133,8 @@ Dependencies: `jekyll ~> 3.8`, `webrick ~> 1.7`, `kramdown-parser-gfm`, `ffi ~> 
 ### _layouts/default.html (22 lines)
 Base HTML5 layout for all non-post pages. Includes `head.html`, `navbar.html`, `footer.html`. Loads `theme.js` before `</body>`. **Used by:** index.md, about.md, blog.md, projects.md, research.md, resume.md, cv.md, editor.md (via editor.html which extends this pattern).
 
-### _layouts/post.html (54 lines)
-Blog post layout. Renders: `<article>` with title, ISO 8601 date (`date_to_xmlschema`), human-readable date (`"%B %-d, %Y"`), tag list (iterates `page.tags`), post content, previous/next navigation links. **Used by:** all files in `_posts/`.
+### _layouts/post.html (~90 lines)
+Blog post layout. Renders: `<article>` with title, ISO 8601 date (`date_to_xmlschema`), human-readable date (`"%B %-d, %Y"`), tag list (iterates `page.tags`), post content, previous/next navigation links. Includes BlogPosting JSON-LD structured data (headline, datePublished, author, image, keywords). **Used by:** all files in `_posts/`.
 
 ### _layouts/editor.html (83 lines)
 Local editor layout. Loads Toast UI Editor CSS/JS. Contains: post title input, datetime picker, tags input, draft checkbox, Toast UI Editor div, image upload form, action buttons (new/save/publish/delete), post list sidebar. **Conditionally rendered:** only when `site.local_editor == true` AND `jekyll.environment == "development"`. Loads `editor.js`.
@@ -141,15 +143,19 @@ Local editor layout. Loads Toast UI Editor CSS/JS. Contains: post title input, d
 
 ## Includes
 
-### _includes/head.html (30 lines)
+### _includes/head.html (~87 lines)
 HTML `<head>` contents:
-- Meta: charset, viewport, dynamic title, description (excerpt truncated to 160 chars), author
+- Meta: charset, viewport, dynamic title, description (priority: `page.description` > `page.excerpt` truncated to 160 chars > `site.description`), author
+- Canonical URL: `<link rel="canonical">` using `absolute_url`
+- Feed discovery: `{% feed_meta %}` (Atom feed link from jekyll-feed)
 - Anti-AI/crawler: `<meta name="robots" content="noai, noimageai">`, `<meta name="tdm-reservation" content="1">`
-- Open Graph: type ("article" for posts, "website" otherwise), URL, title, description
+- Open Graph: type ("article" for posts, "website" otherwise), URL, title, description, site_name, image (post's first image or headshot fallback). Posts also get `article:published_time`, `article:author`, `article:tag`
+- Twitter Card: summary card with site handle (@ryanmye0), title, description, image
 - CSS: preloads `styles.css` with cache-busting timestamp
 - Fonts: Google Fonts preconnect, loads Inter, DM Serif Display, JetBrains Mono
 - Font Awesome 6.4.2 (loaded with `media="print" onload` for non-blocking)
 - Favicon: inline base64 SVG graduation cap emoji
+- JSON-LD structured data: WebSite schema on all pages; Person schema (with sameAs links to GitHub, LinkedIn, Google Scholar) on homepage only
 
 ### _includes/navbar.html (54 lines)
 Sticky top navigation bar:
@@ -169,7 +175,7 @@ Site footer with: dynamic copyright year, "Jesus is King" statement, social link
 ## Root Pages
 
 ### index.md — Homepage
-**Layout:** default. **Data deps:** `site.data.about.bio_profile`, `site.data.about.skills`, `site.data.research.positions` (filtered by `homepage: true`), `site.posts` (limit 3), `_config.yml` (author, email, github_username, linkedin_username).
+**Layout:** default. **Title:** "CS @ Cornell". **Data deps:** `site.data.about.bio_profile`, `site.data.about.skills`, `site.data.research.positions` (filtered by `homepage: true`), `site.posts` (limit 3), `_config.yml` (author, email, github_username, linkedin_username). Has page-specific `description` for SEO meta.
 
 Sections:
 1. **Profile card** — headshot, name (`site.author`), position (Cornell CS), social links from `_config.yml`, skills tags (from `_data/about.yml`), profile bio from `site.data.about.bio_profile`
@@ -477,6 +483,7 @@ Automated Spotify "recently played" sync.
 ## Conventions & Patterns
 
 - **Post filenames:** `YYYY-MM-DD-slug.md` in `_posts/`, `slug.md` in `_drafts/`
+- **Page front matter (root pages):** `layout: default`, `title: "..."`, `permalink: /slug/`, `description: "..."` (SEO meta description, ~150 chars)
 - **Post front matter:** `layout: post`, `title: "..."`, `date: YYYY-MM-DD` (or ISO 8601), `tags: [array]`, optional `excerpt: "..."`, optional `images: [{src, caption}]` (photo album, max 25)
 - **Album filenames:** `slug.md` in `_albums/`
 - **Album front matter:** `layout: album`, `title: "..."`, `date: YYYY-MM-DD`, `description: "..."` (max 500 chars), optional `draft: true`, `images: [{src, caption}]`
