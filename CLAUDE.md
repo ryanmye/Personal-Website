@@ -4,7 +4,7 @@
 > 1. Update the relevant sections of this file to reflect your changes before finishing.
 > 2. **Anti-AI defense is a hard requirement.** Every new page, layout, or include you create MUST follow the anti-AI defense checklist in the "Anti-AI Defense" section below. Do not skip this, even for dev-only pages.
 >
-> Last updated: 2026-03-28
+> Last updated: 2026-04-11
 
 ## Project Overview
 
@@ -54,9 +54,8 @@ bundle exec jekyll build --config _config.yml,_config_prod.yml
 │   └── footer.html          # Copyright, social links, faith statement
 │
 ├── _data/
-│   ├── profile.yml          # Name, email, social URLs
-│   ├── about.yml            # Bio, interests, education, skills
-│   ├── projects.yml         # 5 portfolio projects with tags/descriptions
+│   ├── about.yml            # Bio, interests, education, skills, teaching, honors
+│   ├── projects.yml         # 5 portfolio projects with tags/descriptions (3 have cv: true)
 │   ├── research.yml         # Research positions, publications, interests
 │   └── now-playing.json     # Spotify track (auto-updated by GitHub Actions)
 │
@@ -69,8 +68,8 @@ bundle exec jekyll build --config _config.yml,_config_prod.yml
 ├── blog.md                  # Blog listing
 ├── projects.md              # Projects showcase
 ├── research.md              # Research page
-├── resume.md                # Resume page
-├── cv.md                    # CV page
+├── cv.md                    # CV page (data-driven from about.yml, research.yml, projects.yml)
+├── publications.md          # All publications listing (pub-tiles, no filter)
 ├── editor.md                # Editor page (dev-only)
 ├── album-editor.md          # Album editor page (dev-only)
 ├── gallery.md               # Photo gallery page (album cards + all photos grid)
@@ -169,15 +168,15 @@ Site footer with: dynamic copyright year, "Jesus is King" statement, social link
 
 ## Root Pages
 
-### index.md (186 lines) — Homepage
-**Layout:** default. **Data deps:** `site.data.about.skills`, `site.posts` (limit 3).
+### index.md — Homepage
+**Layout:** default. **Data deps:** `site.data.about.bio_profile`, `site.data.about.skills`, `site.data.research.positions` (filtered by `homepage: true`), `site.posts` (limit 3), `_config.yml` (author, email, github_username, linkedin_username).
 
 Sections:
-1. **Profile card** — headshot, name, position (Cornell CS), social links, skills tags (from `_data/about.yml`)
+1. **Profile card** — headshot, name (`site.author`), position (Cornell CS), social links from `_config.yml`, skills tags (from `_data/about.yml`), profile bio from `site.data.about.bio_profile`
 2. **Spotify widget** — `#spotify-now-playing` span, populated by inline `<script>` that fetches `/assets/data/now-playing.json` with 5s timeout. Helper functions: `timeAgo(isoStr)`, `escapeHtml(str)`. Renders track name, artists, context (playlist/album), relative time.
-3. **About blurb** — hardcoded summary paragraph
+3. **About blurb** — hardcoded editorial paragraph (intentionally distinct from `about.yml.bio`)
 4. **Blog preview** — table of latest 3 posts (date + title + truncated excerpt)
-5. **Research preview** — hardcoded Sun Lab entry
+5. **Research preview** — from `site.data.research.positions` where `homepage: true`
 
 ### about.md (44 lines) — About Page
 **Layout:** default. **Data deps:** `site.data.about` (bio, education, skills, interests).
@@ -194,12 +193,13 @@ Renders project cards by iterating `site.data.projects`. Each card: title, date 
 **Layout:** default. **Data deps:** `site.data.research`.
 Sections: subtitle, research positions (with role, lab, description, focus areas, notes), publications list, research interests, Google Scholar link.
 
-### resume.md (138 lines) — Resume
-**Layout:** default. **Data deps:** `site.data.about`, `site.data.projects`, `site.data.research`.
-Full resume page with education, skills, research positions, projects, publications. Pulls from multiple data files.
+### publications.md — Publications
+**Layout:** default. **Data deps:** `site.data.research.publications`, `site.data.research.google_scholar`.
+Shows ALL publications as `.pub-tile` horizontal tiles (no `selected` filter). Linked from "more publications →" on `research.md`.
 
-### cv.md (137 lines) — CV
-**Layout:** default. Similar to resume.md but formatted as academic CV with additional sections (coursework, interests).
+### cv.md — CV
+**Layout:** default. **Data deps:** `site.data.about` (education, skills, teaching, honors), `site.data.research.positions` (filtered by `cv: true`), `site.data.research.publications`, `site.data.projects.projects` (filtered by `cv: true`).
+Fully data-driven Liquid template. To add/edit CV content, edit the data files — do not hardcode HTML in this file.
 
 ### editor.md (15 lines) — Editor Page
 **Layout:** editor. Minimal wrapper that activates the editor layout. Only rendered in development when `local_editor: true`.
@@ -218,25 +218,42 @@ Outputs `site.data['now-playing']` as JSON via Liquid `jsonify` filter. This is 
 
 ## Data Files
 
-### _data/profile.yml
-Author identity: name ("Ryan Ye"), email, short description, social links (GitHub, LinkedIn, Google Scholar URLs).
+> **Contact info lives in `_config.yml`** (`author`, `email`, `github_username`, `linkedin_username`). There is no `_data/profile.yml` — it was removed as a duplicate. Templates use `site.email`, `site.github_username`, `site.linkedin_username`, and `site.author` directly.
 
 ### _data/about.yml
-Structured resume data:
-- `bio`: multi-line description
+Structured personal data:
+- `bio`: multi-line description (used by about.md)
+- `bio_profile`: short 1-paragraph intro (used by index.md profile card)
 - `interests`: list of 4 research areas (ML, CV, AI for science, representation learning)
-- `education`: institution (Cornell), degree (B.S. CS, College of Engineering), expected May 2028, GPA 4.05, coursework by category
+- `education`: institution (Cornell), degree (B.S. CS, College of Engineering), expected May 2028, GPA 4.05, coursework array (joined with ", " for cv.md)
 - `skills`: programming (Python, Java, C/C++, OCaml), machine_learning (PyTorch, HF Transformers, NumPy, pandas, Matplotlib), tools (Git, VS Code, Jupyter, etc.)
+- `teaching`: array of teaching/leadership entries, each with title, date, subtitle, bullets (used by cv.md)
+- `honors`: array of honor strings (used by cv.md)
 
 ### _data/projects.yml
 Ordered list of 5 projects, each with: `title`, `date` (range string), `description`, `tags` (array), `bullets` (array), optional `url`. Projects: Calf Behavior Analysis, Traveling Salesman (hackathon), Sisyphus (AI productivity app), Piano Melody Generation, Personal Website.
 
+CV display fields (on 3 projects: Traveling Salesman, Sisyphus, Piano Melody Generation):
+- `cv: true` — flags project to appear in cv.md
+- `cv_tech` — tech subtitle string shown under project title on CV
+- `cv_bullets` — array of resume-style bullet points for CV (may differ from `bullets`)
+
 ### _data/research.yml
 - `subtitle`: research focus statement
-- `scholar_url`: Google Scholar link
-- `positions`: 2 entries (MABe25 benchmark, AI for Animal Behavior) each with role, lab, PI, description, focus areas, notes
-- `publications`: 1 entry (economics paper, 2023)
+- `google_scholar`: Google Scholar link
+- `positions`: 2 entries (MABe25 benchmark, AI for Animal Behavior) each with role, lab, institution, description, focus areas, note
+- `publications`: 1 entry (economics paper, 2023) — each publication also has `cv_year` and `cv_subtitle` for CV display
 - `interests`: 4 research interest areas
+
+Homepage and CV display fields (on position 2 — AI for Animal Behavior):
+- `homepage: true` — flags this position to appear on index.md research preview
+- `index_title` — shortened title for homepage display
+- `index_description` — homepage-specific summary paragraph (first-person, different from `description`)
+- `cv: true` — flags position to appear in cv.md
+- `cv_title` — formatted title line for CV (e.g. "Role — Lab")
+- `cv_date` — date range string for CV
+- `cv_subtitle` — subtitle line for CV (e.g. grant/program info)
+- `cv_bullets` — array of resume-style bullet points for CV
 
 ### _data/now-playing.json
 Auto-updated by GitHub Actions every 30 min. Schema:

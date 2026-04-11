@@ -18,6 +18,11 @@ projects:
       - "Designed and implemented the frontend for Traveling Salesman, a conversational flight search tool with an interactive trip planner"
       - "Built React UI with split-screen chat, interactive 2D/3D map, and collaborative trip sharing"
     url: "https://github.com/boaz-ng/traveling-salesmen"
+    cv: true
+    cv_tech: "React.js, Backend Integration, REST API"
+    cv_bullets:
+      - "Designed and implemented the frontend for Traveling Salesman, a conversational flight search tool with an interactive trip planner"
+      - "Built React.js UI with split-screen chat, interactive 2D/3D map, and collaborative trip sharing; integrated with FastAPI backend via REST"
 
   - title: "Sisyphus — AI Productivity App"
     date: "Nov 2025"
@@ -27,6 +32,12 @@ projects:
       - "Designed and implemented full-stack application with React frontend and Node.js backend"
       - "Photo-based task verification using Claude API; automated accountability system with email notifications"
     url: "https://github.com/matthewj5/sisyphus"
+    cv: true
+    cv_tech: "Full-Stack, React.js, Claude API, REST API"
+    cv_bullets:
+      - "Designed and implemented full-stack application with React frontend and Node.js backend"
+      - "AI-powered task verification via Claude API; automated accountability system with email notifications"
+      - "Top 5 out of 40+ teams in course competition"
 
   - title: "Transformer-Based Piano Melody Generation"
     date: "Aug 2023 - Apr 2024"
@@ -37,6 +48,11 @@ projects:
       - "Compared CNN, RNN, LSTM, and Transformer architectures"
       - "Demonstrated improved musical coherence with fine-tuned pretrained transformers"
     url: null
+    cv: true
+    cv_tech: "Python, PyTorch, MusicAutobot"
+    cv_bullets:
+      - "Trained transformer models on 20k+ MIDI files from MAESTRO and Lakh datasets"
+      - "Compared CNN, RNN, LSTM, and Transformer architectures for musical coherence"
 
   - title: "Personal Website"
     date: "Mar 2026"

@@ -16,19 +16,26 @@ permalink: /research/
 
 ## Publications
 
-{% for pub in site.data.research.publications %}
-<div class="publication">
-  <p class="publication-title">{% if pub.url %}<a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</p>
-  <p class="publication-authors">{{ pub.authors }}</p>
-  <p class="publication-venue">{{ pub.venue }}</p>
-  <p style="font-size:0.9rem;margin-top:0.5rem">{{ pub.description }}</p>
-  <div class="tags" style="margin-top:0.5rem">
-    {% for tag in pub.tags %}
-    <span class="tag">{{ tag }}</span>
-    {% endfor %}
+{% assign selected_pubs = site.data.research.publications | where: "selected", true %}
+{% for pub in selected_pubs %}
+<div class="pub-tile">
+  <div class="pub-tile-image">
+    {% if pub.image %}
+    <img src="{{ pub.image | relative_url }}" alt="{{ pub.title }}">
+    {% else %}
+    <i class="fas fa-file-alt pub-tile-icon" aria-hidden="true"></i>
+    {% endif %}
+  </div>
+  <div class="pub-tile-body">
+    <p class="pub-tile-title">{% if pub.url %}<a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</p>
+    <p class="pub-tile-authors">{{ pub.authors }}</p>
+    <p class="pub-tile-venue">{{ pub.venue }}</p>
+    {% if pub.description %}<p class="pub-tile-description">{{ pub.description }}</p>{% endif %}
+    {% if pub.tags %}<div class="tags">{% for tag in pub.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>{% endif %}
   </div>
 </div>
 {% endfor %}
+<a href="{{ '/publications' | relative_url }}">more publications &rarr;</a>
 
 ---
 

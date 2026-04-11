@@ -34,3 +34,26 @@ skills:
   programming: "Python, Java, C/C++, OCaml"
   machine_learning: "PyTorch, Hugging Face Transformers, NumPy, pandas, Matplotlib"
   tools: "Git, VS Code, Jupyter Notebook, IntelliJ, PyCharm, SSH, vibe-coding"
+
+blog_blurb: "Notes, thoughts, and life-updates."
+
+bio_profile: |
+  I'm Ryan Ye, an undergraduate in Computer Science at Cornell University. I work on
+  computer vision and machine learning in the Sun Lab (PI: Jennifer Sun), building
+  systems for dairy calf behavior analysis to support veterinary researchers studying
+  early indicators of disease and welfare. Outside of academics, I play violin in a
+  quartet and serve in Cru as a student leader in worship team.
+
+teaching:
+  - title: "Basic Coding — Co-Founder & President"
+    date: "Aug 2020 - May 2024"
+    subtitle: "Volunteer online programming education during COVID-19"
+    bullets:
+      - "Taught Python, Java, and C/C++ to elementary and middle school students"
+      - "Reached 300+ students across multiple U.S. states"
+
+honors:
+  - "CIDA Grant Recipient"
+  - "4× AIME Qualifier"
+  - "USACO Silver Division"
+  - "Conestoga High School CS Department Award"

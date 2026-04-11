@@ -39,6 +39,6 @@ Relevant coursework:
 
 ## Contact
 
-- **Email:** [{{ site.data.profile.email }}](mailto:{{ site.data.profile.email }})
-- **LinkedIn:** [linkedin.com/in/rmy43]({{ site.data.profile.social.linkedin }})
-- **GitHub:** [github.com/ryanmye]({{ site.data.profile.social.github }})
+- **Email:** [{{ site.email }}](mailto:{{ site.email }})
+- **LinkedIn:** [linkedin.com/in/{{ site.linkedin_username }}](https://linkedin.com/in/{{ site.linkedin_username }})
+- **GitHub:** [github.com/{{ site.github_username }}](https://github.com/{{ site.github_username }})

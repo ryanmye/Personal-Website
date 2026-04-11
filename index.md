@@ -6,33 +6,27 @@ title: "About"
 <div class="profile-section">
   <div class="profile-left">
     <div class="profile-avatar">
-      <img src="{{ '/assets/images/headshot.jpeg' | relative_url }}" alt="Ryan Ye" width="160" height="160" decoding="async">
+      <img src="{{ '/assets/images/headshot.jpeg' | relative_url }}" alt="{{ site.author }}" width="160" height="160" decoding="async">
     </div>
-    <h1 class="profile-name">Ryan Ye</h1>
+    <h1 class="profile-name">{{ site.author }}</h1>
     <p class="profile-position">
       Computer Science<br>
       <a href="https://www.cs.cornell.edu/" target="_blank" rel="noopener noreferrer">Cornell University</a>
     </p>
     <div class="profile-social">
-      <a href="mailto:rmy43@cornell.edu" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-      <a href="https://github.com/ryanmye" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/in/rmy43/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+      <a href="mailto:{{ site.email }}" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
     </div>
     <p class="profile-faith-note">Jesus is King</p>
   </div>
 
   <div class="profile-right">
-    <p>
-      I'm Ryan Ye, an undergraduate in Computer Science at Cornell University. I work on
-      computer vision and machine learning in the <a href="https://akanksha-sarkar.github.io/SunLab-website/" target="_blank" rel="noopener noreferrer">Sun Lab</a> (PI: Jennifer Sun), currently
-      building systems for animal behavior monitoring in agricultural environments. I'm
-      currently interested in AI for science and making research tools that augment
-      scientist workflows.
-    </p>
+    <p>{{ site.data.about.bio_profile }}</p>
     <div class="profile-contact-row">
-      <span><i class="fas fa-envelope fa-sm" aria-hidden="true"></i> <a href="mailto:rmy43@cornell.edu">rmy43@cornell.edu</a></span>
-      <span><i class="fab fa-linkedin fa-sm" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/rmy43/" target="_blank" rel="noopener noreferrer">linkedin.com/in/rmy43</a></span>
-      <span><i class="fab fa-github fa-sm" aria-hidden="true"></i> <a href="https://github.com/ryanmye" target="_blank" rel="noopener noreferrer">github.com/ryanmye</a></span>
+      <span><i class="fas fa-envelope fa-sm" aria-hidden="true"></i> <a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+      <span><i class="fab fa-linkedin fa-sm" aria-hidden="true"></i> <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/{{ site.linkedin_username }}</a></span>
+      <span><i class="fab fa-github fa-sm" aria-hidden="true"></i> <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer">github.com/{{ site.github_username }}</a></span>
     </div>
     <div class="profile-skills">
       <span class="profile-skills-label">Programming:</span>
@@ -56,20 +50,47 @@ title: "About"
 </div>
 
 <div class="content-section">
-  <h2 class="section-title">About</h2>
+  <div class="section-header">
+    <h2 class="section-title" style="border:none;padding:0;margin:0">Research</h2>
+    <a href="{{ '/research' | relative_url }}">see more &rarr;</a>
+  </div>
 
-  <p>
-    I'm an undergraduate at Cornell (College of Engineering) with interests in machine
-    learning, computer vision, and AI for scientific discovery. I enjoy working at the
-    intersection of AI and real-world systems—especially where better data and automation
-    can help researchers scale their work.
-  </p>
-  <p>
-    I conduct research in the Sun Lab, working on a project to develop computer vision
-    methods for dairy calf behavior analysis to support veterinary researchers studying
-    early indicators of disease and welfare. Outside of academics, I play violin in a
-    quartet and serve in Cru as a student leader in worship team.
-  </p>
+  {% for position in site.data.research.positions %}{% if position.homepage %}
+  <div class="research-entry">
+    <h3>{{ position.index_title }}</h3>
+    <p class="research-meta">
+      <span class="research-role">{{ position.role }}</span> &mdash; {{ position.lab }}, {{ position.institution }}
+    </p>
+    <p>{{ position.index_description }}</p>
+    <p style="font-size:0.875rem;color:var(--muted)">{{ position.note }}</p>
+  </div>
+  {% endif %}{% endfor %}
+
+  {% assign selected_pubs = site.data.research.publications | where: "selected", true %}
+  {% if selected_pubs.size > 0 %}
+  <h3 style="margin-top:1.5rem;margin-bottom:0.25rem;font-size:1rem;font-weight:600;">Selected Publications</h3>
+  {% for pub in selected_pubs limit:3 %}
+  <div class="pub-tile">
+    <div class="pub-tile-image">
+      {% if pub.image %}
+      <img src="{{ pub.image | relative_url }}" alt="{{ pub.title }}">
+      {% else %}
+      <i class="fas fa-file-alt pub-tile-icon" aria-hidden="true"></i>
+      {% endif %}
+    </div>
+    <div class="pub-tile-body">
+      <p class="pub-tile-title">{% if pub.url %}<a href="{{ pub.url }}" target="_blank" rel="noopener noreferrer">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</p>
+      <p class="pub-tile-authors">{{ pub.authors }}</p>
+      <p class="pub-tile-venue">{{ pub.venue }}</p>
+      {% if pub.description %}<p class="pub-tile-description">{{ pub.description }}</p>{% endif %}
+      {% if pub.tags %}
+      <div class="tags">{% for tag in pub.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  <a href="{{ '/research' | relative_url }}" style="font-size:0.9rem;">see more &rarr;</a>
+  {% endif %}
 </div>
 
 <div class="content-section">
@@ -77,6 +98,7 @@ title: "About"
     <h2 class="section-title" style="border:none;padding:0;margin:0">Blog</h2>
     <a href="{{ '/blog' | relative_url }}">all posts &rarr;</a>
   </div>
+  <p style="margin:0.4rem 0 1rem;color:var(--muted);font-size:0.95rem;">{{ site.data.about.blog_blurb }}</p>
 
   {% if site.posts.size > 0 %}
   <table class="news-table post-preview-table">
@@ -105,31 +127,6 @@ title: "About"
   {% else %}
   <p class="news-empty">No posts yet — check back soon!</p>
   {% endif %}
-</div>
-
-<div class="content-section">
-  <div class="section-header">
-    <h2 class="section-title" style="border:none;padding:0;margin:0">Research</h2>
-    <a href="{{ '/research' | relative_url }}">see more &rarr;</a>
-  </div>
-
-  <div class="research-entry">
-    <h3>AI for Animal Behavior Monitoring</h3>
-    <p class="research-meta">
-      <span class="research-role">Undergraduate Researcher</span> &mdash; Sun Lab (PI: Jennifer Sun), Cornell University
-    </p>
-    <p>
-      I work on scalable computer vision systems for analyzing dairy calf behavior in
-      agricultural environments, supporting veterinary researchers studying early indicators
-      of disease and welfare. Work spans pose classification with self-supervised DINO
-      features, YOLO-based object detection on a self-annotated dataset, and evaluation
-      of vision-language models for farm settings.
-    </p>
-    <p style="font-size:0.875rem;color:var(--muted)">
-      Conducted as part of the Bowers Undergraduate Research Experience (BURE) with
-      support from a CIDA grant.
-    </p>
-  </div>
 </div>
 
 <script>
