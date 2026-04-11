@@ -1,16 +1,16 @@
 {
   "track": {
-    "name": "we never dated",
-    "url": "https://open.spotify.com/track/0t1fdMrn7JOg9DDsT95bxt",
+    "name": "Seven",
+    "url": "https://open.spotify.com/track/5QvditjxADt1HMKPgaMjJm",
     "artists": [
       {
-        "name": "sombr",
-        "url": "https://open.spotify.com/artist/4G9NDjRyZFDlJKMRL8hx3S"
+        "name": "Men I Trust",
+        "url": "https://open.spotify.com/artist/3zmfs9cQwzJl575W1ZYXeT"
       }
     ],
-    "played_at": "2026-04-11T19:06:44.737Z"
+    "played_at": "2026-04-11T20:17:57.685Z"
   },
-  "fetched_at": "2026-04-11T19:08:49Z",
+  "fetched_at": "2026-04-11T20:18:57Z",
   "context": {
     "type": "playlist",
     "name": "floating",
