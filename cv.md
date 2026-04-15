@@ -30,6 +30,26 @@ description: "CV of Ryan Ye — education, research, publications, projects, and
 </div>
 
 <div class="resume-section">
+  <h2>Skills</h2>
+  <div class="resume-item">
+    <div class="profile-skills">
+      <span class="profile-skills-label">Programming:</span>
+      <div class="profile-skills-row">
+        {% assign prog = site.data.about.skills.programming | split: ", " %}
+        {% for s in prog %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+      <span class="profile-skills-label">ML & tools:</span>
+      <div class="profile-skills-row">
+        {% assign ml = site.data.about.skills.machine_learning | split: ", " %}
+        {% assign tools = site.data.about.skills.tools | split: ", " %}
+        {% for s in ml %}<span class="tag">{{ s }}</span>{% endfor %}
+        {% for s in tools %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="resume-section">
   <h2>Research</h2>
   {% for position in site.data.research.positions %}{% if position.cv %}
   <div class="resume-item">
@@ -94,11 +114,13 @@ description: "CV of Ryan Ye — education, research, publications, projects, and
 </div>
 
 <div class="resume-section">
-  <h2>Skills</h2>
+  <h2>Interests</h2>
   <div class="resume-item">
-    <p><strong>Programming:</strong> {{ site.data.about.skills.programming }}</p>
-    <p><strong>Machine Learning:</strong> {{ site.data.about.skills.machine_learning }}</p>
-    <p><strong>Tools:</strong> {{ site.data.about.skills.tools }}</p>
+    <ul>
+      {% for interest in site.data.about.interests %}
+      <li><strong>{{ interest | split: " — " | first }}</strong> — {{ interest | split: " — " | last }}</li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 

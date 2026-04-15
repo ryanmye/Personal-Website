@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "CS @ Cornell"
-description: "Ryan Ye — CS student at Cornell building computer vision and ML systems. Projects, research, publications, and blog."
+title: "Computer Science Student at Cornell University"
+description: "Ryan Ye is an undergraduate Computer Science student at Cornell University (College of Engineering) researching machine learning and computer vision. View my research, projects, and publications."
 ---
 
 <div class="profile-section">
   <div class="profile-left">
     <div class="profile-avatar">
-      <img src="{{ '/assets/images/headshot.jpeg' | relative_url }}" alt="{{ site.author }}" width="160" height="160" decoding="async">
+      <img src="{{ '/assets/images/headshot.jpeg' | relative_url }}" alt="Ryan Ye - Cornell University Computer Science Student" width="160" height="160" decoding="async">
     </div>
     <h1 class="profile-name">{{ site.author }}</h1>
     <p class="profile-position">
@@ -16,33 +16,19 @@ description: "Ryan Ye — CS student at Cornell building computer vision and ML 
     </p>
     <div class="profile-social">
       <a href="mailto:{{ site.email }}" title="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="me noopener noreferrer" title="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="me noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
     </div>
     <p class="profile-faith-note">Jesus is King</p>
   </div>
 
   <div class="profile-right">
-    <p>{{ site.data.about.bio_profile }}</p>
-    <div class="profile-contact-row">
-      <span><i class="fas fa-envelope fa-sm" aria-hidden="true"></i> <a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
-      <span><i class="fab fa-linkedin fa-sm" aria-hidden="true"></i> <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/{{ site.linkedin_username }}</a></span>
-      <span><i class="fab fa-github fa-sm" aria-hidden="true"></i> <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer">github.com/{{ site.github_username }}</a></span>
-    </div>
-    <div class="profile-skills">
-      <span class="profile-skills-label">Programming:</span>
-      <div class="profile-skills-row">
-        {% assign prog = site.data.about.skills.programming | split: ", " %}
-        {% for s in prog %}<span class="tag">{{ s }}</span>{% endfor %}
-      </div>
-      <span class="profile-skills-label">ML & tools:</span>
-      <div class="profile-skills-row">
-        {% assign ml = site.data.about.skills.machine_learning | split: ", " %}
-        {% assign tools = site.data.about.skills.tools | split: ", " %}
-        {% for s in ml %}<span class="tag">{{ s }}</span>{% endfor %}
-        {% for s in tools %}<span class="tag">{{ s }}</span>{% endfor %}
-      </div>
-    </div>
+    {{ site.data.about.bio_profile | markdownify }}
+    <p class="profile-edu-line">
+      <strong>{{ site.data.about.education.institution }}</strong>
+      &middot; {{ site.data.about.education.degree }}
+      &middot; GPA {{ site.data.about.education.gpa }}
+    </p>
     <p class="spotify-widget" aria-live="polite" aria-atomic="true">
       <i class="fab fa-spotify spotify-icon" aria-hidden="true"></i>
       <span id="spotify-now-playing">Loading&hellip;</span>

@@ -50,10 +50,13 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "{{ site.url }}{{ site.baseurl }}/#website",
   "name": "{{ site.title }}",
+  "description": "{{ site.description }}",
   "url": "{{ site.url }}{{ site.baseurl }}/",
   "author": {
     "@type": "Person",
+    "@id": "{{ site.url }}{{ site.baseurl }}/#ryan-ye",
     "name": "{{ site.author }}"
   }
 }
@@ -63,17 +66,38 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "{{ site.url }}{{ site.baseurl }}/#ryan-ye",
   "name": "{{ site.author }}",
   "url": "{{ site.url }}{{ site.baseurl }}/",
+  "email": "{{ site.email }}",
   "image": "{{ '/assets/images/headshot.jpeg' | absolute_url }}",
-  "jobTitle": "Computer Science Student",
+  "jobTitle": "Undergraduate Computer Science Student",
+  "description": "{{ site.description }}",
+  "memberOf": {
+    "@type": "CollegeOrUniversity",
+    "@id": "https://www.cornell.edu",
+    "name": "Cornell University",
+    "url": "https://www.cornell.edu"
+  },
   "affiliation": {
     "@type": "CollegeOrUniversity",
-    "name": "Cornell University"
+    "@id": "https://www.cornell.edu",
+    "name": "Cornell University",
+    "url": "https://www.cornell.edu"
   },
+  "knowsAbout": [
+    "Machine Learning",
+    "Computer Vision",
+    "Deep Learning",
+    "Artificial Intelligence",
+    "Animal Behavior Analysis",
+    "Cornell University",
+    "Computer Science"
+  ],
   "sameAs": [
     "https://github.com/{{ site.github_username }}",
-    "https://linkedin.com/in/{{ site.linkedin_username }}"{% if site.data.research.google_scholar %},
+    "https://linkedin.com/in/{{ site.linkedin_username }}",
+    "https://twitter.com/{{ site.twitter_username }}"{% if site.data.research.google_scholar %},
     "{{ site.data.research.google_scholar }}"{% endif %}
   ]
 }
