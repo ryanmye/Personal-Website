@@ -1,24 +1,16 @@
 {
   "track": {
-    "name": "Holy Forever - Live From Good Friday 2023",
-    "url": "https://open.spotify.com/track/3SOD2rOwadCSRKluvV36Sv",
+    "name": "Always On Time - Break Open",
+    "url": "https://open.spotify.com/track/6xAzxpF29ET0Ys5BZMmGAB",
     "artists": [
       {
-        "name": "Chris Tomlin",
-        "url": "https://open.spotify.com/artist/6pRi6EIPXz4QJEOEsBaA0m"
-      },
-      {
-        "name": "Jenn Johnson",
-        "url": "https://open.spotify.com/artist/0cuW2lF0YWb9VUyHOnvnsO"
-      },
-      {
-        "name": "Brian Johnson",
-        "url": "https://open.spotify.com/artist/7qTSoObqlJkIybERfumbQ9"
+        "name": "Pat Barrett",
+        "url": "https://open.spotify.com/artist/0289SkqAn0iOohwm0pIHv3"
       }
     ],
-    "played_at": "2026-04-15T23:00:26.690Z"
+    "played_at": "2026-04-23T13:00:00.961Z"
   },
-  "fetched_at": "2026-04-15T23:05:52Z",
+  "fetched_at": "2026-04-23T15:06:33Z",
   "context": {
     "type": "playlist",
     "name": "surrender my life",
