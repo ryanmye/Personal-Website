@@ -1,19 +1,14 @@
 {
   "track": {
-    "name": "Always On Time - Break Open",
-    "url": "https://open.spotify.com/track/6xAzxpF29ET0Ys5BZMmGAB",
+    "name": "All Things End",
+    "url": "https://open.spotify.com/track/5csu6psyW6UN4ggucwOuDR",
     "artists": [
       {
-        "name": "Pat Barrett",
-        "url": "https://open.spotify.com/artist/0289SkqAn0iOohwm0pIHv3"
+        "name": "Hozier",
+        "url": "https://open.spotify.com/artist/2FXC3k01G6Gw61bmprjgqS"
       }
     ],
-    "played_at": "2026-04-23T13:00:00.961Z"
+    "played_at": "2026-04-23T17:21:54.020Z"
   },
-  "fetched_at": "2026-04-23T15:06:33Z",
-  "context": {
-    "type": "playlist",
-    "name": "surrender my life",
-    "url": "https://open.spotify.com/playlist/1eQ5bBxjfhMjB797PyQmgq"
-  }
+  "fetched_at": "2026-04-23T18:02:14Z"
 }
