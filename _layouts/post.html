@@ -62,7 +62,13 @@
           <div class="album-grid">
             {% for img in page.images %}
             <figure class="album-photo">
-              <img src="{{ img.src | relative_url }}" alt="{{ img.caption | default: page.title }}" loading="lazy">
+              <button type="button" class="album-photo-trigger"
+                      data-album-index="{{ forloop.index0 }}"
+                      data-full-src="{{ img.src | relative_url }}"
+                      data-caption="{{ img.caption | default: '' | escape }}"
+                      aria-label="Open photo{% if img.caption and img.caption != '' %}: {{ img.caption | escape }}{% endif %}">
+                <img src="{{ img.src | relative_url }}" alt="{{ img.caption | default: page.title }}" loading="lazy">
+              </button>
               {% if img.caption and img.caption != "" %}
               <figcaption>{{ img.caption }}</figcaption>
               {% endif %}
@@ -92,5 +98,6 @@
 
 </div>
 <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/album-lightbox.js' | relative_url }}" defer></script>
 </body>
 </html>

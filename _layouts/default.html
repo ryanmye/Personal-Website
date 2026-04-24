@@ -18,5 +18,8 @@
 
 </div>
 <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+{% if page.album_lightbox %}
+<script src="{{ '/assets/js/album-lightbox.js' | relative_url }}" defer></script>
+{% endif %}
 </body>
 </html>

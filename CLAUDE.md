@@ -4,11 +4,11 @@
 > 1. Update the relevant sections of this file to reflect your changes before finishing.
 > 2. **Anti-AI defense is a hard requirement.** Every new page, layout, or include you create MUST follow the anti-AI defense checklist in the "Anti-AI Defense" section below. Do not skip this, even for dev-only pages.
 >
-> Last updated: 2026-04-11
+> Last updated: 2026-04-24
 
 ## Project Overview
 
-Jekyll 3.8 personal website and blog for **Ryan Ye** (CS @ Cornell). Deployed on GitHub Pages at `ryanmye.github.io/aboutme`. Features data-driven pages (projects, research, about), a 5-theme color system, a local blog editor with Sinatra API, and automated Spotify "recently played" integration via GitHub Actions.
+Jekyll 3.8 personal website and blog for **Ryan Ye** (CS @ Cornell). Deployed on GitHub Pages at `ryanmye.github.io/aboutme`. Features data-driven pages (homepage bio, projects, research, CV), a 5-theme color system, a local blog editor + standalone album editor with Sinatra API, standalone photo albums (Jekyll collection), a gallery page, and automated Spotify "recently played" integration via GitHub Actions.
 
 ## Quick Reference
 
@@ -54,17 +54,16 @@ bundle exec jekyll build --config _config.yml,_config_prod.yml
 │   └── footer.html          # Copyright, social links, faith statement
 │
 ├── _data/
-│   ├── about.yml            # Bio, interests, education, skills, teaching, honors
+│   ├── about.yml            # Bio (long + short), interests, education, skills, teaching, honors, blog_blurb
 │   ├── projects.yml         # 5 portfolio projects with tags/descriptions (3 have cv: true)
-│   ├── research.yml         # Research positions, publications, interests
+│   ├── research.yml         # Research positions (2), publications, interests
 │   └── now-playing.json     # Spotify track (auto-updated by GitHub Actions)
 │
-├── _posts/                  # Blog posts (YYYY-MM-DD-slug.md)
-├── _drafts/                 # Unpublished drafts (slug.md)
+├── _posts/                  # Blog posts (YYYY-MM-DD-slug.md) — currently 3 posts
+├── _drafts/                 # Unpublished drafts (slug.md) — currently 2 drafts
 ├── _albums/                 # Standalone photo albums (slug.md, Jekyll collection)
 │
-├── index.md                 # Homepage
-├── about.md                 # About page
+├── index.md                 # Homepage (profile + research + blog + selected pubs, Spotify widget)
 ├── blog.md                  # Blog listing
 ├── projects.md              # Projects showcase
 ├── research.md              # Research page
@@ -76,7 +75,7 @@ bundle exec jekyll build --config _config.yml,_config_prod.yml
 ├── now-playing.json.html    # Exposes _data/now-playing.json as static JSON endpoint
 │
 ├── assets/
-│   ├── css/styles.css       # Full stylesheet (23 sections)
+│   ├── css/styles.css       # Full stylesheet (~25 sections)
 │   ├── js/theme.js          # Theme switcher (localStorage persistence)
 │   ├── js/editor.js         # Post editor UI (CRUD, image upload, Toast UI)
 │   ├── js/album-editor.js   # Album editor UI (post albums + standalone albums + image deletion)
@@ -115,13 +114,14 @@ Main Jekyll configuration. Key settings:
 - `permalink: /blog/:year/:month/:day/:title/`
 - `local_editor: true` — enables editor nav link and page in development
 - `plugins: [jekyll-sitemap, jekyll-feed]` — auto-generates `sitemap.xml` and `feed.xml`
-- Default layout `post` applied to all files in `_posts/`
-- Excludes: README.md, Gemfile, Gemfile.lock, node_modules, vendor
+- `collections.albums`: `output: true`, `permalink: /albums/:title/` — standalone album Jekyll collection
+- Defaults: `post` layout applied to all files in `_posts/`, `album` layout applied to all files in `_albums/`
+- Excludes: README.md, CLAUDE.md, Gemfile, Gemfile.lock, node_modules, vendor
 
-### _config_prod.yml (4 lines)
+### _config_prod.yml (5 lines)
 Production overlay (used in CI build). Overrides:
 - `local_editor: false` — hides editor
-- Excludes `editor.md` and `scripts/local_editor_server.rb` from build
+- Excludes `editor.md`, `album-editor.md`, and `scripts/local_editor_server.rb` from build
 
 ### Gemfile
 Dependencies: `jekyll ~> 3.8`, `webrick ~> 1.7`, `kramdown-parser-gfm`, `ffi ~> 1.15`, `jekyll-sitemap`, `jekyll-feed`, `sinatra ~> 3.0` (development group)
@@ -130,20 +130,26 @@ Dependencies: `jekyll ~> 3.8`, `webrick ~> 1.7`, `kramdown-parser-gfm`, `ffi ~> 
 
 ## Layouts
 
-### _layouts/default.html (22 lines)
-Base HTML5 layout for all non-post pages. Includes `head.html`, `navbar.html`, `footer.html`. Loads `theme.js` before `</body>`. **Used by:** index.md, about.md, blog.md, projects.md, research.md, resume.md, cv.md, editor.md (via editor.html which extends this pattern).
+### _layouts/default.html (25 lines)
+Base HTML5 layout for all non-post, non-album pages. Includes `head.html`, `navbar.html`, `footer.html`. Loads `theme.js` before `</body>`. Also conditionally loads `album-lightbox.js` when the page sets `album_lightbox: true` in its front matter (currently used by `gallery.md`). **Used by:** `index.md`, `blog.md`, `projects.md`, `research.md`, `publications.md`, `cv.md`, `gallery.md`.
 
-### _layouts/post.html (~90 lines)
-Blog post layout. Renders: `<article>` with title, ISO 8601 date (`date_to_xmlschema`), human-readable date (`"%B %-d, %Y"`), tag list (iterates `page.tags`), post content, previous/next navigation links. Includes BlogPosting JSON-LD structured data (headline, datePublished, author, image, keywords). **Used by:** all files in `_posts/`.
+### _layouts/post.html (97 lines)
+Blog post layout. Renders: `<article>` with title, ISO 8601 date (`date_to_xmlschema`), human-readable date (`"%B %-d, %Y"`), tag list (iterates `page.tags`), post content, optional photocard album grid (if `page.images` present — each image wrapped in `<button class="album-photo-trigger">` for lightbox), previous/next navigation links. Includes BlogPosting JSON-LD structured data (headline, datePublished, author, image, keywords). Loads `theme.js` and `album-lightbox.js`. **Used by:** all files in `_posts/` via default collection config.
 
-### _layouts/editor.html (83 lines)
-Local editor layout. Loads Toast UI Editor CSS/JS. Contains: post title input, datetime picker, tags input, draft checkbox, Toast UI Editor div, image upload form, action buttons (new/save/publish/delete), post list sidebar. **Conditionally rendered:** only when `site.local_editor == true` AND `jekyll.environment == "development"`. Loads `editor.js`.
+### _layouts/album.html (53 lines)
+Standalone photo album detail page layout. Renders: title, date, optional description, photocard grid of `page.images` (`<figure>` + `<button class="album-photo-trigger">` + `<figcaption>`), and a "Back to gallery" link. Loads `theme.js` and `album-lightbox.js` for lightbox support. **Used by:** all files in `_albums/` via default collection config. Permalink: `/albums/:title/`.
+
+### _layouts/editor.html (105 lines)
+Local blog post editor layout. Loads Toast UI Editor CSS/JS. Contains: post title input, datetime picker, tags input, draft checkbox, Toast UI Editor div, image upload form (file + caption + upload button), action buttons (new/save/publish/delete), post list sidebar. Includes inline CSS that highlights editor "Caption:" hints (stripped on publish). **Conditionally rendered:** only when `site.local_editor == true` AND `jekyll.environment == "development"`. Loads `editor.js`.
+
+### _layouts/album-editor.html (80 lines)
+Local album editor layout. Contains: standalone album metadata section (title, description with 500-char counter, draft checkbox — hidden for post albums), album image upload row, album items grid (with captions and delete buttons), action buttons (new/save/delete), and a tabbed sidebar ("Post Albums" / "Standalone Albums") with two lists. **Conditionally rendered:** only when `site.local_editor == true` AND `jekyll.environment == "development"`. Loads `album-editor.js`.
 
 ---
 
 ## Includes
 
-### _includes/head.html (~87 lines)
+### _includes/head.html (110 lines)
 HTML `<head>` contents:
 - Meta: charset, viewport, dynamic title, description (priority: `page.description` > `page.excerpt` truncated to 160 chars > `site.description`), author
 - Canonical URL: `<link rel="canonical">` using `absolute_url`
@@ -155,15 +161,16 @@ HTML `<head>` contents:
 - Fonts: Google Fonts preconnect, loads Inter, DM Serif Display, JetBrains Mono
 - Font Awesome 6.4.2 (loaded with `media="print" onload` for non-blocking)
 - Favicon: inline base64 SVG graduation cap emoji
-- JSON-LD structured data: WebSite schema on all pages; Person schema (with sameAs links to GitHub, LinkedIn, Google Scholar) on homepage only
+- JSON-LD structured data: WebSite schema on all pages; Person schema (with `sameAs` links to GitHub, LinkedIn, Twitter, Google Scholar) on homepage only. Person schema includes `jobTitle`, `memberOf`/`affiliation` (Cornell), `knowsAbout` keywords.
+- Inline theme-bootstrap `<script>` at end: reads `localStorage.theme` and applies CSS custom properties synchronously to prevent flash of wrong theme on load.
 
-### _includes/navbar.html (54 lines)
+### _includes/navbar.html (55 lines)
 Sticky top navigation bar:
-- Brand link (site.author) to homepage
+- Brand link (`site.author`) to homepage
 - 5 theme color dot buttons (`data-theme` attribute) with inline background-color previews
-- Nav links: About (`/`), Research (`/research`), Projects (`/projects`), Blog (`/blog`), CV (`/cv`). Gallery linked from blog page header.
-- Dev-only nav links: Editor (`/editor`), Albums (`/album-editor`)
-- Conditional: Editor link shown only when `site.local_editor == true` AND `jekyll.environment == "development"`
+- Nav links (order): about (`/`), research (`/research`), projects (`/projects`), blog (`/blog`), cv (`/cv`). Blog link is also active on `/gallery`. Gallery is linked from blog page header, not navbar.
+- Dev-only nav links: editor (`/editor`), albums (`/album-editor`) — between `blog` and `cv`
+- Conditional: dev-only links shown only when `site.local_editor == true` AND `jekyll.environment == "development"`
 - Mobile: hamburger toggle button (3 spans), click-outside-to-close JS, ARIA attributes
 - Active link detection via `page.url` comparison
 
@@ -175,29 +182,25 @@ Site footer with: dynamic copyright year, "Jesus is King" statement, social link
 ## Root Pages
 
 ### index.md — Homepage
-**Layout:** default. **Title:** "CS @ Cornell". **Data deps:** `site.data.about.bio_profile`, `site.data.about.skills`, `site.data.research.positions` (filtered by `homepage: true`), `site.posts` (limit 3), `_config.yml` (author, email, github_username, linkedin_username). Has page-specific `description` for SEO meta.
+**Layout:** default. **Title:** "Computer Science Student at Cornell University". **Data deps:** `site.data.about.bio_profile`, `site.data.about.education`, `site.data.about.blog_blurb`, `site.data.research.positions` (filtered by `homepage: true`), `site.data.research.publications` (filtered by `selected: true`), `site.posts` (limit 3), `_config.yml` (author, email, github_username, linkedin_username). Has page-specific `description` for SEO meta.
 
-Sections:
-1. **Profile card** — headshot, name (`site.author`), position (Cornell CS), social links from `_config.yml`, skills tags (from `_data/about.yml`), profile bio from `site.data.about.bio_profile`
-2. **Spotify widget** — `#spotify-now-playing` span, populated by inline `<script>` that fetches `/assets/data/now-playing.json` with 5s timeout. Helper functions: `timeAgo(isoStr)`, `escapeHtml(str)`. Renders track name, artists, context (playlist/album), relative time.
-3. **About blurb** — hardcoded editorial paragraph (intentionally distinct from `about.yml.bio`)
-4. **Blog preview** — table of latest 3 posts (date + title + truncated excerpt)
-5. **Research preview** — from `site.data.research.positions` where `homepage: true`
+Sections (top to bottom):
+1. **Profile card** (`.profile-section`) — two columns:
+   - **Left (`.profile-left`):** headshot, name (`site.author`), position ("Computer Science" + Cornell link), social icons (email, GitHub, LinkedIn), "Jesus is King" note.
+   - **Right (`.profile-right`):** bio from `site.data.about.bio_profile`, education one-liner (institution · degree · GPA), **Spotify widget** (`#spotify-now-playing` span, populated by inline `<script>` that fetches `/assets/data/now-playing.json` with 5s timeout; helpers: `timeAgo(isoStr)`, `escapeHtml(str)`; renders track name, artists, context (playlist/album/artist), relative time).
+2. **Research preview** — from `site.data.research.positions` where `homepage: true`. Uses `position.index_title` and `position.index_description`. Followed by "Selected Publications" subsection (publications where `selected: true`, rendered as `.pub-tile`), with "see more →" link to `/research`.
+3. **Blog preview** — `site.data.about.blog_blurb` as subtitle, then table of latest 3 posts (date + title + truncated excerpt).
 
-### about.md (44 lines) — About Page
-**Layout:** default. **Data deps:** `site.data.about` (bio, education, skills, interests).
-Renders full bio, education details (Cornell, GPA 4.05, coursework), research interests, and skills.
+### blog.md (43 lines) — Blog Listing
+**Layout:** default. Lists all `site.posts` in reverse chronological order. Each entry shows date, title link, and truncated excerpt. Page header has a "gallery →" link next to the "Blog" title.
 
-### blog.md (38 lines) — Blog Listing
-**Layout:** default. Lists all `site.posts` in reverse chronological order. Each entry shows date, title link, tags, and truncated excerpt.
+### projects.md (47 lines) — Projects
+**Layout:** default. **Data deps:** `site.data.projects.projects`.
+Renders project cards by iterating `site.data.projects.projects`. Each card: title (with optional URL link), date range, description, tech tags, bullet points, optional GitHub link.
 
-### projects.md (45 lines) — Projects
-**Layout:** default. **Data deps:** `site.data.projects`.
-Renders project cards by iterating `site.data.projects`. Each card: title, date range, description, tech tags, bullet points, optional GitHub link.
-
-### research.md (72 lines) — Research
+### research.md (81 lines) — Research
 **Layout:** default. **Data deps:** `site.data.research`.
-Sections: subtitle, research positions (with role, lab, description, focus areas, notes), publications list, research interests, Google Scholar link.
+Sections: subtitle, Google Scholar link, selected publications (`where: selected, true`) as `.pub-tile`, "more publications →" link, research positions (with role, lab, description, nested `focus: [{title, detail}]` areas, optional note), research interests.
 
 ### publications.md — Publications
 **Layout:** default. **Data deps:** `site.data.research.publications`, `site.data.research.google_scholar`.
@@ -211,7 +214,7 @@ Fully data-driven Liquid template. To add/edit CV content, edit the data files �
 **Layout:** editor. Minimal wrapper that activates the editor layout. Only rendered in development when `local_editor: true`.
 
 ### gallery.md — Gallery Page
-**Layout:** default. **Permalink:** `/gallery/`. Linked from blog page header ("gallery →"). Iterates both `site.posts` and `site.albums` (Jekyll collection), renders album cards for items with `images` frontmatter (cover image, title, date, photo count). Post-album cards link to the post URL; standalone album cards link to `/albums/:slug/`. Below albums, shows "All Photos" grid with every image across all posts and albums. Fully static — no JS needed. Standalone albums with `draft: true` are excluded.
+**Layout:** default. **Permalink:** `/gallery/`. **Front matter:** sets `album_lightbox: true` so `default.html` loads `album-lightbox.js`. Linked from blog page header ("gallery →"). Iterates both `site.posts` and `site.albums` (Jekyll collection), renders album cards for items with `images` frontmatter (cover image, title, date, photo count). Post-album cards link to the post URL; standalone album cards link to `/albums/:slug/`. Below albums, shows "All Photos" as a photocard masonry grid (`.album-grid` / `.album-photo` + `.album-photo-trigger`) matching the blog post / album detail format — clicking any photo opens the full-screen lightbox with prev/next across every photo in document order. A running Liquid counter (`photo_idx`) assigns a global `data-album-index` across both the posts and albums loops. Standalone albums with `draft: true` are excluded.
 
 ### album-editor.md — Album Editor Page
 **Layout:** album-editor. **Permalink:** `/album-editor/`. Dev-only. Tabbed interface: "Post Albums" tab lists blog posts for managing their photo albums; "Standalone Albums" tab lists standalone albums. Supports creating new standalone albums with title, description (max 500 chars), and draft flag. Removing an image from an album also deletes the file from disk (if not referenced elsewhere). Post albums use `PUT /posts/:kind/:slug/images`; standalone albums use `POST/PUT/DELETE /albums/:slug`.
@@ -228,16 +231,22 @@ Outputs `site.data['now-playing']` as JSON via Liquid `jsonify` filter. This is 
 
 ### _data/about.yml
 Structured personal data:
-- `bio`: multi-line description (used by about.md)
-- `bio_profile`: short 1-paragraph intro (used by index.md profile card)
-- `interests`: list of 4 research areas (ML, CV, AI for science, representation learning)
+- `bio`: multi-line description (longer, first-person; reserved — no page currently renders it since `about.md` was removed)
+- `bio_profile`: short 1-paragraph intro (used by index.md profile-right column)
+- `interests`: list of 4 research areas (ML/CV, AI for science, representation learning, data-efficient learning)
 - `education`: institution (Cornell), degree (B.S. CS, College of Engineering), expected May 2028, GPA 4.05, coursework array (joined with ", " for cv.md)
-- `skills`: programming (Python, Java, C/C++, OCaml), machine_learning (PyTorch, HF Transformers, NumPy, pandas, Matplotlib), tools (Git, VS Code, Jupyter, etc.)
+- `skills`: programming (Python, Java, C/C++, OCaml), machine_learning (PyTorch, HF Transformers, NumPy, pandas, Matplotlib), tools (Git, VS Code, Jupyter, IntelliJ, PyCharm, SSH, vibe-coding)
 - `teaching`: array of teaching/leadership entries, each with title, date, subtitle, bullets (used by cv.md)
-- `honors`: array of honor strings (used by cv.md)
+- `honors`: array of honor strings (used by cv.md) — CIDA Grant Recipient, 4× AIME Qualifier, USACO Silver, Conestoga HS CS Award
+- `blog_blurb`: one-line tagline under Blog heading on homepage
 
 ### _data/projects.yml
-Ordered list of 5 projects, each with: `title`, `date` (range string), `description`, `tags` (array), `bullets` (array), optional `url`. Projects: Calf Behavior Analysis, Traveling Salesman (hackathon), Sisyphus (AI productivity app), Piano Melody Generation, Personal Website.
+Top-level key `projects` — ordered list of 5 projects, each with: `title`, `date` (range string), `description`, `tags` (array), `bullets` (array), optional `url`. Current projects (in order):
+1. **Automated Calf Behavior Analysis System** (May 2025 - present) — YOLO/DINO/VLMs for calf posture
+2. **Traveling Salesman** (Mar 2026) — hackathon conversational flight search
+3. **Sisyphus** (Nov 2025) — AI productivity app, top 5 of 40+ teams
+4. **Transformer-Based Piano Melody Generation** (Aug 2023 - Apr 2024)
+5. **Personal Website** (Mar 2026) — this site
 
 CV display fields (on 3 projects: Traveling Salesman, Sisyphus, Piano Melody Generation):
 - `cv: true` — flags project to appear in cv.md
@@ -247,9 +256,12 @@ CV display fields (on 3 projects: Traveling Salesman, Sisyphus, Piano Melody Gen
 ### _data/research.yml
 - `subtitle`: research focus statement
 - `google_scholar`: Google Scholar link
-- `positions`: 2 entries (MABe25 benchmark, AI for Animal Behavior) each with role, lab, institution, description, focus areas, note
-- `publications`: 1 entry (economics paper, 2023) — each publication also has `cv_year` and `cv_subtitle` for CV display
-- `interests`: 4 research interest areas
+- `positions`: 2 entries:
+  1. **MABe25 - Animal Behavior Benchmark** (Feb 2025 - Present)
+  2. **AI for Animal Behavior Monitoring** (May 2025 - Present) — accepted to ADSA 2026 Poster
+  Each entry has `title`, `role`, `lab`, `institution`, `date`, multi-line `description`, and a `focus` array of `{title, detail}` objects (rendered as nested bullets on `research.md`). Position 2 also has `note` (BURE/CIDA grant).
+- `publications`: 1 entry (economics paper, 2023) — each publication has `title`, `authors`, `venue`, `url`, `description`, `tags`, `selected` (boolean), plus `cv_year` and `cv_subtitle` for CV display.
+- `interests`: 4 research interest areas.
 
 Homepage and CV display fields (on position 2 — AI for Animal Behavior):
 - `homepage: true` — flags this position to appear on index.md research preview
@@ -277,52 +289,68 @@ Auto-updated by GitHub Actions every 30 min. Schema:
 
 ---
 
-## Blog Posts
+## Blog Posts & Albums
+
+Published posts (in `_posts/`):
 
 | File | Title | Date | Tags |
 |------|-------|------|------|
-| `2026-01-01-first-post.md` | Hello, World — Welcome to My Blog | Jan 1, 2026 | life-update, meta, jekyll |
-| `2026-01-20-spring-semester-started.md` | Spring 2026 Semester Started | Jan 20, 2026 | life-update |
-| `2026-03-10-research-symposium-accepted.md` | Abstract accepted to ADSA! | Mar 12, 2026 | research, life-update |
-| `2026-03-17-first-real-blog-post.md` | first real blog post | Mar 17, 2026 | life update |
+| `2025-12-01-i-was-part-of-an-art-exhibit.md` | I Was Part of an Art Exhibit | Dec 1, 2025 | life-update, i'm an artist now |
+| `2026-03-12-research-symposium-accepted.md` | Abstract accepted to ADSA! | Mar 12, 2026 | research, life-update |
+| `2026-03-17-first-real-blog-post.md` | first real blog post | Mar 17, 2026 | brief life update, test post |
 
-Post front matter schema: `layout: post`, `title`, `date` (YYYY-MM-DD or ISO 8601 with timezone), `tags` (array), optional `excerpt`, optional `images` (array of `{src, caption}` for photo album — displayed on gallery page).
+Unpublished drafts (in `_drafts/`):
+
+| File | Title |
+|------|-------|
+| `first-post.md` | Hello, World — Welcome to My Blog |
+| `spring-semester-started.md` | Spring 2026 Semester Started |
+
+Standalone albums (in `_albums/`):
+
+| File | Title | Date |
+|------|-------|------|
+| `some-cornell-propoganda.md` | Some Cornell Propoganda | Apr 23, 2026 |
+
+Post front matter schema: `layout: post`, `title`, `date` (YYYY-MM-DD or ISO 8601 with timezone), `tags` (array), optional `excerpt`, optional `images` (array of `{src, caption?}` for photo album — displayed at bottom of post page and on gallery page).
 
 ---
 
 ## Assets
 
-### assets/css/styles.css
-Single stylesheet with 23 sections. CSS custom properties for theming (11 variables: `--bg`, `--surface`, `--border`, `--text`, `--muted`, `--accent`, `--accent-soft`, `--accent-dark`, `--color-code-bg`, `--color-code-text`, `--theme-dot-border`). Max width: 960px.
+### assets/css/styles.css (1942 lines)
+Single stylesheet. CSS custom properties for theming (11 variables: `--bg`, `--surface`, `--border`, `--text`, `--muted`, `--accent`, `--accent-soft`, `--accent-dark`, `--color-code-bg`, `--color-code-text`, `--theme-dot-border`). Max width: 960px (`--max-width`).
 
-**Section index:**
+**Section index (line numbers approximate):**
 
 | Line | Section |
 |------|---------|
 | 1 | CSS Reset & Base |
-| 10 | Custom Properties (theme defaults) |
+| 10 | Custom Properties (theme defaults: linen palette) |
 | 55 | Base Typography |
-| 131 | Layout (site wrapper, container) |
-| 152 | Navigation (sticky, al-folio tab style) |
-| 283 | Footer |
-| 347 | Editor (form styling) |
-| 517 | Profile Section (avatar, social, bio, skills) |
-| 666 | Content / Page Sections |
-| 690 | Section Headers (blog/page headings) |
-| 715 | Page Header (inner pages) |
-| 737 | Cards (project showcase, hover effects) |
-| 815 | Tags |
-| 838 | Blog / Post List |
-| 876 | Blog Post Page (article styling, figures, code blocks) |
-| ~1015 | Gallery Page (album cards grid, all-photos grid) |
-| ~1095 | Album Detail Page (album grid, album description, post album section) |
-| ~1166 | Editor Album Section (thumbnail rows, caption inputs, tabs) |
-| ~1160 | Research / Publications |
-| ~1215 | CV / Resume Page |
-| ~1335 | Skills list (inline tags) |
-| ~1355 | Responsive (mobile breakpoints) |
-| ~1430 | Spotify Widget |
-| ~1460 | Announcements / News Table |
+| 138 | Layout (site wrapper, container) |
+| 159 | Navigation (sticky, al-folio tab style) |
+| 290 | Footer |
+| 354 | Editor (form styling) |
+| 551 | Profile Section (avatar, social, bio, skills, Spotify widget) |
+| 706 | Content / Page Sections |
+| 730 | Section Headers (blog/page headings) |
+| 755 | Page Header (inner pages) |
+| 777 | Cards (projects) |
+| 855 | Tags |
+| 878 | Blog / Post List |
+| 916 | Blog Post Page (article, figures, code blocks, album grid) |
+| 1055 | Gallery Page (album cards grid) |
+| 1106 | Album Detail Page (album grid, photocard styling, description, nav) |
+| 1185 | Album Lightbox (fullscreen overlay, prev/next, caption, counter) |
+| 1345 | Editor Album Section (thumbnail rows, caption inputs, tabs) |
+| 1441 | Research / Publications |
+| 1494 | Publication Tiles (horizontal pub-tile cards) |
+| 1567 | CV / Resume Page |
+| 1687 | Skills list (inline tags) |
+| 1708 | Responsive (mobile breakpoints) |
+| 1785 | Spotify Widget |
+| 1816 | Announcements / News Table (al-folio style) |
 
 Key patterns: always use `var(--name)` for colors, never hardcode hex values in component styles. Reduced-motion media query at L36 disables transitions.
 
@@ -334,7 +362,20 @@ IIFE that manages the 5-theme color system:
 - Runs synchronously on load (prevents flash of wrong theme)
 - Event listeners on `.theme-dot` buttons
 
-### assets/js/editor.js
+### assets/js/album-lightbox.js (~145 lines)
+IIFE that powers the album photocard lightbox on post and album pages. **Depends on:** `.album-photo-trigger` buttons rendered by `post.html` / `album.html` with `data-album-index`, `data-full-src`, `data-caption` attributes.
+
+Key behavior:
+- On `DOMContentLoaded`, collects all `.album-photo-trigger` buttons on the page. If none, no-ops (no DOM injected, no listeners).
+- Injects a single `<div class="album-lightbox" role="dialog" aria-modal="true" hidden>` overlay into `<body>` with close/prev/next buttons, full-size `<img>`, `<figcaption>`, and a counter (`n / total`).
+- `showAt(i)` updates image src, alt, caption text, counter. Wraps around via modulo.
+- Click a trigger → open at that index; click backdrop or close button → close.
+- Keyboard: `Esc` closes; `ArrowLeft` / `ArrowRight` navigate when >1 photo.
+- Focus management: saves previously focused element, focuses close button on open, restores focus on close, traps Tab within the overlay.
+- Locks body scroll (`document.body.style.overflow = 'hidden'`) while open.
+- Sets `data-single="true"` on the overlay when only one photo (hides prev/next and counter via CSS).
+
+### assets/js/editor.js (438 lines)
 Blog post editor UI. **Depends on:** Toast UI Editor library (loaded by editor.html layout), `local_editor_server.rb` API on port 4001.
 
 Key functions:
@@ -346,7 +387,7 @@ Key functions:
 
 API origin configurable via `data-api-origin` attribute (defaults to `http://localhost:4001`).
 
-### assets/js/album-editor.js
+### assets/js/album-editor.js (445 lines)
 Album editor UI with tabs for post albums and standalone albums. **Depends on:** `local_editor_server.rb` API on port 4001.
 
 Key features:
@@ -367,8 +408,8 @@ Key features:
 
 ## Scripts
 
-### scripts/local_editor_server.rb
-Sinatra REST API on `127.0.0.1:4001` for local blog editing. **Depends on:** sinatra, json, yaml, base64.
+### scripts/local_editor_server.rb (861 lines)
+Sinatra REST API on `127.0.0.1:4001` for local blog editing. **Depends on:** sinatra, json, yaml, fileutils, time, base64 (all stdlib or development-group gems).
 
 **Endpoints:**
 
@@ -468,7 +509,7 @@ Automated Spotify "recently played" sync.
 `editor.md` (layout: editor) → `editor.html` loads Toast UI Editor + `editor.js` → `editor.js` CRUD calls to `local_editor_server.rb:4001` → server reads/writes `_posts/`, `_drafts/`, manages images in `_editor_tmp/` and `assets/images/`.
 
 ### Photo Gallery
-`gallery.md` (linked from blog page) iterates both `site.posts` and `site.albums` → renders album cards (cover, title, count) + full photo grid. Post-album cards link to the post URL (album grid rendered at bottom of post page). Standalone album cards link to `/albums/:slug/` (dedicated detail page). Fully static — no JS. Draft standalone albums (`draft: true`) excluded from gallery.
+`gallery.md` (linked from blog page) iterates both `site.posts` and `site.albums` → renders album cards (cover, title, count) + an "All Photos" photocard grid. Post-album cards link to the post URL (album grid rendered at bottom of post page). Standalone album cards link to `/albums/:slug/` (dedicated detail page). The All Photos grid uses the same `.album-photo` + lightbox components as post / album pages — clicking any photo opens the shared full-screen lightbox (loaded via `album_lightbox: true` front-matter flag on `gallery.md`, wired up in `default.html`). Draft standalone albums (`draft: true`) excluded from gallery.
 
 **Image sources for post albums:**
 1. **Auto-detected:** server extracts `![alt](url)` patterns from post body on save → merged into `images` frontmatter
@@ -484,9 +525,9 @@ Automated Spotify "recently played" sync.
 
 - **Post filenames:** `YYYY-MM-DD-slug.md` in `_posts/`, `slug.md` in `_drafts/`
 - **Page front matter (root pages):** `layout: default`, `title: "..."`, `permalink: /slug/`, `description: "..."` (SEO meta description, ~150 chars)
-- **Post front matter:** `layout: post`, `title: "..."`, `date: YYYY-MM-DD` (or ISO 8601), `tags: [array]`, optional `excerpt: "..."`, optional `images: [{src, caption}]` (photo album, max 25)
+- **Post front matter:** `layout: post` (applied by default), `title: "..."`, `date: YYYY-MM-DD` (or ISO 8601), `tags: [array]`, optional `excerpt: "..."`, optional `images: [{src, caption?}]` (photo album, max 25). The `caption` key on each image is optional.
 - **Album filenames:** `slug.md` in `_albums/`
-- **Album front matter:** `layout: album`, `title: "..."`, `date: YYYY-MM-DD`, `description: "..."` (max 500 chars), optional `draft: true`, `images: [{src, caption}]`
+- **Album front matter:** `layout: album` (applied by default), `title: "..."`, `date: YYYY-MM-DD`, `description: "..."` (max 500 chars), optional `draft: true`, `images: [{src, caption?}]`
 - **Image naming:** `YYYYMMDDHHMMSS-originalname.ext` (timestamp prefix, set by editor server)
 - **CSS theming:** always use `var(--name)` for colors; never hardcode hex in component styles
 - **Data access:** `_data/` files accessed as `site.data.filename` in Liquid
