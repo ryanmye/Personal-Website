@@ -178,6 +178,28 @@ albums/20260424013659-Screenshot_2026-04-24_at_01.34.33.png:
     src: albums/20260424013659-Screenshot_2026-04-24_at_01.34.33-thumb.jpg
     w: 600
   w: 1256
+albums/20260426132505-IMG_8462.JPG:
+  w: 4032
+  h: 3024
+  thumb:
+    src: albums/20260426132505-IMG_8462-thumb.jpg
+    w: 600
+    h: 800
+  med:
+    src: albums/20260426132505-IMG_8462-med.jpg
+    w: 1600
+    h: 2133
+albums/20260426132512-IMG_8468.JPG:
+  w: 4032
+  h: 3024
+  thumb:
+    src: albums/20260426132512-IMG_8468-thumb.jpg
+    w: 600
+    h: 800
+  med:
+    src: albums/20260426132512-IMG_8468-med.jpg
+    w: 1600
+    h: 2133
 drafts/20260328022349-IMG_2768.jpeg:
   h: 3024
   med:

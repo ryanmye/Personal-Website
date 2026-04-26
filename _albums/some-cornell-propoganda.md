@@ -1,7 +1,7 @@
 ---
 layout: album
 title: "Some Cornell Propoganda"
-date: 2026-04-24T01:37:03-04:00
+date: 2026-04-26T13:25:19-04:00
 description: "Just some Cornell propaganda. Disclaimer: These pictures are not representative of Cornell's usual state. They were all taken during April (the month where everything happens)."
 images:
   - src: "/assets/images/albums/20260423142901-Screenshot_2026-04-23_at_14.22.20.png"
@@ -20,4 +20,6 @@ images:
   - src: "/assets/images/albums/20260424013659-Screenshot_2026-04-24_at_01.30.33.png"
   - src: "/assets/images/albums/20260424013659-Screenshot_2026-04-24_at_01.32.47.png"
   - src: "/assets/images/albums/20260424013659-Screenshot_2026-04-24_at_01.34.33.png"
+  - src: "/assets/images/albums/20260426132505-IMG_8462.JPG"
+  - src: "/assets/images/albums/20260426132512-IMG_8468.JPG"
 ---
